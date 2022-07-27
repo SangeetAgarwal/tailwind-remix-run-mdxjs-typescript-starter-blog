@@ -3,7 +3,8 @@ import PageTitle from "~/components/PageTitle"
 import SectionContainer from "~/components/SectionContainer"
 import formatDate from "~/lib/utils/formatDate"
 
-export default function PostLayout({ frontMatter, authorDetails, next, prev, children }: { frontMatter: any, authorDetails: any, next: any, prev: any, children: any }): JSX.Element {
+export default function PostLayout({ frontMatter, authorDetails, next, prev, children }: { frontMatter: { [key: string]: any }, authorDetails: any, next: { title: string, slug: string, date: string, tags: string[], draft: boolean, summary: string } | null, prev: { title: string, slug: string, date: string, tags: string[], draft: boolean, summary: string } | null, children: React.ReactNode }): JSX.Element {
+
 	const { date, title } = frontMatter
 
 	return (

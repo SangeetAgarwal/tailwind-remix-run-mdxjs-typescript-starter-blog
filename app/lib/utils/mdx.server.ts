@@ -76,7 +76,7 @@ export function dateSortDesc(
   }
   return 0;
 }
-export async function getFileBySlug(type: string, slug: any) {
+export async function getFileBySlug(type: string, slug: string) {
   const remarkExtractFrontmatterThen = await remarkExtractFrontmatter();
 
   const BananaSlug = (await import("github-slugger")).default;
