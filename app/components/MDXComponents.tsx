@@ -22,10 +22,15 @@ export const MDXComponents = {
     components: MDXContentProps;
     layout: string;
     frontMatter: {
-      date: string | null;
+      title: string;
+      date: string;
       draft: boolean;
       tags: string[];
       summary: string;
+      images: string[];
+      authors: string[];
+      layout: string;
+      canonicalUrl: string;
     };
     authorDetails: any;
     next: {

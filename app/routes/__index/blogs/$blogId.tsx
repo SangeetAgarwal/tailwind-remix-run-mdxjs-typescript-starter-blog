@@ -1,7 +1,6 @@
 import type { LoaderFunction } from "@remix-run/server-runtime";
 import { MDXLayoutRenderer } from "~/components/MDXComponents";
 import PageTitle from "~/components/PageTitle";
-import type { ReadTimeResults } from "reading-time";
 import { getFileBySlug } from "~/lib/utils/mdx.server";
 import { useLoaderData } from "@remix-run/react";
 
@@ -18,10 +17,15 @@ export default function Blog() {
       mdxSource: string;
       toc: [{ value: string; url: string; depth: number }];
       frontMatter: {
-        date: string | null;
+        title: string;
+        date: string;
         draft: boolean;
         tags: string[];
         summary: string;
+        images: string[];
+        authors: string[];
+        layout: string;
+        canonicalUrl: string;
       };
     };
   } = useLoaderData();
