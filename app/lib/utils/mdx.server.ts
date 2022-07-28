@@ -4,7 +4,6 @@ import getAllFilesRecursively from "./files";
 import matter from "gray-matter";
 import path from "path";
 import readingTime from "reading-time";
-import remarkCodeTitles from "./remark-code-titles";
 import remarkExtractFrontmatter from "./remark-extract-frontmatter";
 
 // import rehypeAutolinkHeadings from "rehype-autolink-headings";
@@ -82,6 +81,11 @@ export async function getFileBySlug(type: string, slug: string) {
   const remarkGfm = (await import("remark-gfm")).default;
   const rehypeCitation = (await import("rehype-citation")).default;
   const remarkFootnotes = (await import("remark-footnotes")).default;
+  const rehypePrismPlus = (await import("rehype-prism-plus")).default;
+  const rehypeAutolinkHeadings = (await import("rehype-autolink-headings"))
+    .default;
+  const rehypeKatex = (await import("rehype-katex")).default;
+  const rehypePresetMinify = (await import("rehype-preset-minify")).default;
   const remarkCodeTitles = () => {
     return (tree: any) =>
       visit(tree, "code", (node, index, parent) => {
@@ -204,16 +208,16 @@ export async function getFileBySlug(type: string, slug: string) {
         //  which matches how GitHub works.
         rehypeSlug,
         // https://github.com/rehypejs/rehype-autolink-headings
-        //       rehypeAutolinkHeadings,
+        rehypeAutolinkHeadings,
         // https://github.com/remarkjs/remark-math/tree/main#example-katex
-        //       rehypeKatex,
+        rehypeKatex,
         // https://github.com/timlrx/rehype-citation
         [rehypeCitation, { path: path.join(root, "app", "data") }],
         // https://github.com/timlrx/rehype-prism-plus
         // line numbers and code block highlighting
-        //       [rehypePrismPlus, { ignoreMissing: true }],
+        [rehypePrismPlus, { ignoreMissing: true }],
         // minify html
-        //       rehypePresetMinify,
+        rehypePresetMinify,
       ];
       return options;
     },
