@@ -2300,9 +2300,6 @@ select {
   }
 }
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
 /**
  * CSS Styles for code highlighting.
  * Feel free to customize token styles 
