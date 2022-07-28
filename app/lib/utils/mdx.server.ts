@@ -86,6 +86,8 @@ export async function getFileBySlug(type: string, slug: string) {
     .default;
   const rehypeKatex = (await import("rehype-katex")).default;
   const rehypePresetMinify = (await import("rehype-preset-minify")).default;
+  const remarkMath = (await import("remark-math")).default;
+
   const remarkCodeTitles = () => {
     return (tree: any) =>
       visit(tree, "code", (node, index, parent) => {
@@ -196,7 +198,7 @@ export async function getFileBySlug(type: string, slug: string) {
         // it will automatically add a title to the code block
         remarkCodeTitles,
         // https://github.com/remarkjs/remark-math/tree/main
-        //       remarkMath,
+        remarkMath,
         // this changes the default img tag in markdown i.e. ! to Image component
         // remarkImgToJsx,
       ];
