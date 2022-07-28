@@ -1,8 +1,9 @@
-import { useLoaderData } from "@remix-run/react";
-
 import type { LoaderFunction } from "@remix-run/server-runtime";
 import { MDXLayoutRenderer } from "~/components/MDXComponents";
+import PageTitle from "~/components/PageTitle";
+import type { ReadTimeResults } from "reading-time";
 import { getFileBySlug } from "~/lib/utils/mdx.server";
+import { useLoaderData } from "@remix-run/react";
 
 export const loader: LoaderFunction = async ({ params }: { params: any }) => {
   const id = params.blogId;
@@ -10,15 +11,44 @@ export const loader: LoaderFunction = async ({ params }: { params: any }) => {
   return { post };
 };
 export default function Blog() {
-  const { post } = useLoaderData();
+  const {
+    post,
+  }: {
+    post: {
+      mdxSource: string;
+      toc: [{ value: string; url: string; depth: number }];
+      frontMatter: {
+        date: string | null;
+        draft: boolean;
+        tags: string[];
+        summary: string;
+      };
+    };
+  } = useLoaderData();
 
   return (
-    <div>
-      <MDXLayoutRenderer
-        mdxSource={post.mdxSource}
-        layout={'PostSimple'}
-        frontMatter={post.frontMatter}
-        toc={post.toc}
-      />
-    </div >)
+    <>
+      {post.frontMatter.draft !== true ? (
+        <div>
+          <MDXLayoutRenderer
+            mdxSource={post.mdxSource}
+            layout={"PostSimple"}
+            frontMatter={post.frontMatter}
+            toc={post.toc}
+          />
+        </div>
+      ) : (
+        <>
+          <div className="mt-24 text-center">
+            <PageTitle>
+              Under Construction{" "}
+              <span role="img" aria-label="roadwork sign">
+                🚧
+              </span>
+            </PageTitle>
+          </div>
+        </>
+      )}
+    </>
+  );
 }
