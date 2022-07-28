@@ -1,6 +1,5 @@
-import { visit } from "unist-util-visit";
-
-export default function remarkCodeTitles() {
+export default async function remarkCodeTitles() {
+  const { visit } = await import("unist-util-visit");
   return (tree: any) =>
     visit(tree, "code", (node, index, parent) => {
       const nodeLang = node.lang || "";

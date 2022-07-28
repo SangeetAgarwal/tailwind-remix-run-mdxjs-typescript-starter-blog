@@ -4,6 +4,7 @@ import getAllFilesRecursively from "./files";
 import matter from "gray-matter";
 import path from "path";
 import readingTime from "reading-time";
+import remarkCodeTitles from "./remark-code-titles";
 import remarkExtractFrontmatter from "./remark-extract-frontmatter";
 
 // import rehypeAutolinkHeadings from "rehype-autolink-headings";
@@ -20,8 +21,6 @@ import remarkExtractFrontmatter from "./remark-extract-frontmatter";
 
 const root = process.cwd();
 export function getFiles(type: string) {
-  console.log("dirname", __dirname);
-  console.log("root", root);
   const prefixPaths = path.join(root, "data", type);
   const files = getAllFilesRecursively(prefixPaths);
   // Only want to return blog/path and ignore root, replace is needed to work on Windows
@@ -31,8 +30,6 @@ export function getFiles(type: string) {
 }
 
 export async function getAllFilesFrontMatter(folder: string) {
-  console.log("dirname", __dirname);
-  console.log("root", root);
   const prefixPaths = path.join(root, "app", "data", folder);
 
   const files = getAllFilesRecursively(prefixPaths);
@@ -82,7 +79,41 @@ export async function getFileBySlug(type: string, slug: string) {
   const BananaSlug = (await import("github-slugger")).default;
   const { toString } = await import("mdast-util-to-string");
   const { visit } = await import("unist-util-visit");
+  const remarkGfm = (await import("remark-gfm")).default;
+  const rehypeCitation = (await import("rehype-citation")).default;
+  const remarkFootnotes = (await import("remark-footnotes")).default;
+  const remarkCodeTitles = () => {
+    return (tree: any) =>
+      visit(tree, "code", (node, index, parent) => {
+        const nodeLang = node.lang || "";
+        let language = "";
+        let title = "";
 
+        if (nodeLang.includes(":")) {
+          language = nodeLang.slice(0, nodeLang.search(":"));
+          title = nodeLang.slice(nodeLang.search(":") + 1, nodeLang.length);
+        }
+
+        if (!title) {
+          return;
+        }
+
+        const className = "remark-code-title";
+
+        const titleNode = {
+          type: "mdxJsxFlowElement",
+          name: "div",
+          attributes: [
+            { type: "mdxJsxAttribute", name: "className", value: className },
+          ],
+          children: [{ type: "text", value: title }],
+          data: { _xdmExplicitJsx: true },
+        };
+
+        parent.children.splice(index, 0, titleNode);
+        node.lang = language;
+      });
+  };
   const remarkTocHeadings = (options: {
     exportRef: { value: string; url: string; depth: any }[];
   }) => {
@@ -149,13 +180,17 @@ export async function getFileBySlug(type: string, slug: string) {
         // it will now create a footnote at bottom of page with the text
         // "My reference." & the link to the footnote. Plus a backlink to the
         // footnote.
-        //       remarkGfm,
+        [remarkFootnotes, { inlineNotes: true }],
+        // https://github.com/remarkjs/remark-gfm
+        // remarkGfm is supposed to do what remarkFootnotes does & more but atleast for
+        // for footnotes I couldn't get it to work.
+        remarkGfm,
         // Whereever you have a code block like
         // ```js: nameofjs.js
         // some code
         // ```
         // it will automatically add a title to the code block
-        //       remarkCodeTitles,
+        remarkCodeTitles,
         // https://github.com/remarkjs/remark-math/tree/main
         //       remarkMath,
         // this changes the default img tag in markdown i.e. ! to Image component
@@ -173,7 +208,7 @@ export async function getFileBySlug(type: string, slug: string) {
         // https://github.com/remarkjs/remark-math/tree/main#example-katex
         //       rehypeKatex,
         // https://github.com/timlrx/rehype-citation
-        //       [rehypeCitation, { path: path.join(root, "data") }],
+        [rehypeCitation, { path: path.join(root, "app", "data") }],
         // https://github.com/timlrx/rehype-prism-plus
         // line numbers and code block highlighting
         //       [rehypePrismPlus, { ignoreMissing: true }],
