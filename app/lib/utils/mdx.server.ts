@@ -26,6 +26,7 @@ export type PrevNext = {
 export type FrontMatter = {
   title: string;
   date: string;
+  lastmod: string;
   draft: boolean;
   tags: string[];
   summary: string;
