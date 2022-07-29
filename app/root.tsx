@@ -14,8 +14,6 @@ import type {
 
 import { getUser } from "./session.server";
 import { json } from "@remix-run/node";
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import prismStylesheetUrl from "./styles/prism.css";
 import tailwindStylesheetUrl from "./styles/tailwind.css";
 
 export const links: LinksFunction = () => {
