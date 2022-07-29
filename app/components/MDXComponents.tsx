@@ -1,4 +1,4 @@
-import type { FrontMatter, PrevNext, Toc } from "~/lib/utils/mdx.server";
+import type { ExtendedFrontMatter, FrontMatter, PrevNext, Toc } from "~/lib/utils/mdx.server";
 
 import { BlogNewsletterForm } from "./NewsletterForm";
 import CustomLink from "./Link";
@@ -23,7 +23,7 @@ export const MDXComponents = {
   }: {
     components: MDXContentProps;
     layout: string;
-    frontMatter: FrontMatter;
+    extendedFrontMatter: ExtendedFrontMatter;
     authorDetails: any;
     next: PrevNext;
     prev: PrevNext;
@@ -41,10 +41,9 @@ export const MDXLayoutRenderer = ({
 }: {
   mdxSource: string;
   layout: string;
-  frontMatter: FrontMatter;
+  extendedFrontMatter: ExtendedFrontMatter;
   toc: Toc[];
 }) => {
-  console.log(rest);
   const MDXLayout = useMemo(() => getMDXComponent(mdxSource), [mdxSource]);
   return (
     <MDXLayout layout={layout} components={MDXComponents as any} {...rest} />

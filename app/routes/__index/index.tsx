@@ -1,6 +1,7 @@
 import { Link, useLoaderData } from "@remix-run/react";
 import type { LoaderFunction, MetaFunction } from "@remix-run/server-runtime";
 
+import type { AllFrontMatter } from "~/lib/utils/mdx.server";
 import type { Key } from "react";
 import NewsletterForm from "~/components/NewsletterForm";
 import Tag from "~/components/Tag";
@@ -38,13 +39,7 @@ export default function Index() {
           {posts
             .slice(0, MAX_DISPLAY)
             .map(
-              (frontMatter: {
-                slug: any;
-                date: any;
-                title: any;
-                summary: any;
-                tags: any;
-              }) => {
+              (frontMatter: AllFrontMatter) => {
                 const { slug, date, title, summary, tags } = frontMatter;
                 return (
                   <li key={slug} className="py-12">
