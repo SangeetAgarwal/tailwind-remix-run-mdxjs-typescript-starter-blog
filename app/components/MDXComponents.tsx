@@ -1,3 +1,5 @@
+import type { FrontMatter, PrevNext, Toc } from "~/lib/utils/mdx.server";
+
 import { BlogNewsletterForm } from "./NewsletterForm";
 import CustomLink from "./Link";
 import Image from "./Image";
@@ -21,34 +23,10 @@ export const MDXComponents = {
   }: {
     components: MDXContentProps;
     layout: string;
-    frontMatter: {
-      title: string;
-      date: string;
-      draft: boolean;
-      tags: string[];
-      summary: string;
-      images: string[];
-      authors: string[];
-      layout: string;
-      canonicalUrl: string;
-    };
+    frontMatter: FrontMatter;
     authorDetails: any;
-    next: {
-      title: string;
-      slug: string;
-      date: string;
-      tags: string[];
-      draft: boolean;
-      summary: string;
-    } | null;
-    prev: {
-      title: string;
-      slug: string;
-      date: string;
-      tags: string[];
-      draft: boolean;
-      summary: string;
-    } | null;
+    next: PrevNext;
+    prev: PrevNext;
     children: React.ReactNode;
   }) => {
     // const Layout = require(`~/layouts/${layout}`).default
@@ -63,14 +41,10 @@ export const MDXLayoutRenderer = ({
 }: {
   mdxSource: string;
   layout: string;
-  frontMatter: {
-    date: string | null;
-    draft: boolean;
-    tags: string[];
-    summary: string;
-  };
-  toc: [{ value: string; url: string; depth: number }];
+  frontMatter: FrontMatter;
+  toc: Toc[];
 }) => {
+  console.log(rest);
   const MDXLayout = useMemo(() => getMDXComponent(mdxSource), [mdxSource]);
   return (
     <MDXLayout layout={layout} components={MDXComponents as any} {...rest} />

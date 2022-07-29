@@ -1,3 +1,4 @@
+import type { IReadTimeResults } from "reading-time";
 import { bundleMDX } from "mdx-bundler";
 import fs from "fs";
 import getAllFilesRecursively from "./files";
@@ -6,17 +7,48 @@ import path from "path";
 import readingTime from "reading-time";
 import remarkExtractFrontmatter from "./remark-extract-frontmatter";
 
-// import rehypeAutolinkHeadings from "rehype-autolink-headings";
-// import rehypeCitation from "rehype-citation/.";
-// import rehypeKatex from "rehype-katex";
-// import rehypePresetMinify from "rehype-preset-minify";
-// import rehypePrismPlus from "rehype-prism-plus";
-// import rehypeSlug from "rehype-slug";
-// import remarkCodeTitles from "./remark-code-titles";
-// import remarkExtractFrontmatter from "./remark-extract-frontmatter";
-// import remarkGfm from "remark-gfm";
-// import remarkMath from "remark-math";
-// import remarkTocHeadings from "./remark-toc-headings";
+export type Toc = { value: string; url: string; depth: number };
+
+export type AllFrontMatter = FrontMatter & {
+  slug: string;
+  date: string;
+};
+
+export type PrevNext = {
+  title: string;
+  slug: string;
+  date: string;
+  tags: string[];
+  draft: boolean;
+  summary: string;
+};
+
+export type FrontMatter = {
+  title: string;
+  date: string;
+  draft: boolean;
+  tags: string[];
+  summary: string;
+  images: string[];
+  authors: string[];
+  layout: string;
+  canonicalUrl: string;
+};
+
+export type ExtendedFrontMatter = FrontMatter & {
+  readingTime: IReadTimeResults;
+  slug: string | null;
+  fileName: string;
+  draft: boolean;
+  date: string;
+};
+
+export type Post = {
+  mdxSource: string;
+  toc: Toc[];
+  extendedFrontMatter: ExtendedFrontMatter;
+  layout: string | null;
+};
 
 const root = process.cwd();
 export function getFiles(type: string) {
@@ -120,9 +152,7 @@ export async function getFileBySlug(type: string, slug: string) {
         node.lang = language;
       });
   };
-  const remarkTocHeadings = (options: {
-    exportRef: { value: string; url: string; depth: any }[];
-  }) => {
+  const remarkTocHeadings = (options: { exportRef: Toc[] }) => {
     return (tree: any) => {
       return visit(tree, "heading", (node, index, parent) => {
         const textContent = toString(node);
@@ -160,7 +190,7 @@ export async function getFileBySlug(type: string, slug: string) {
     );
   }
 
-  let toc: string[] = [];
+  let toc: Toc[] = [{ value: "", url: "", depth: 0 }];
 
   const { code, frontmatter } = await bundleMDX({
     source,
@@ -235,7 +265,7 @@ export async function getFileBySlug(type: string, slug: string) {
   return {
     mdxSource: code,
     toc,
-    frontMatter: {
+    extendedFrontMatter: {
       readingTime: readingTime(code),
       slug: slug || null,
       fileName: fs.existsSync(mdxPath) ? `${slug}.mdx` : `${slug}.md`,

@@ -1,6 +1,7 @@
 import type { LoaderFunction } from "@remix-run/server-runtime";
 import { MDXLayoutRenderer } from "~/components/MDXComponents";
 import PageTitle from "~/components/PageTitle";
+import type { Post } from "~/lib/utils/mdx.server";
 import { getFileBySlug } from "~/lib/utils/mdx.server";
 import { useLoaderData } from "@remix-run/react";
 
@@ -13,31 +14,16 @@ export default function Blog() {
   const {
     post,
   }: {
-    post: {
-      mdxSource: string;
-      toc: [{ value: string; url: string; depth: number }];
-      frontMatter: {
-        title: string;
-        date: string;
-        draft: boolean;
-        tags: string[];
-        summary: string;
-        images: string[];
-        authors: string[];
-        layout: string;
-        canonicalUrl: string;
-      };
-    };
+    post: Post;
   } = useLoaderData();
-
   return (
     <>
-      {post.frontMatter.draft !== true ? (
+      {post.extendedFrontMatter.draft !== true ? (
         <div>
           <MDXLayoutRenderer
             mdxSource={post.mdxSource}
             layout={"PostSimple"}
-            frontMatter={post.frontMatter}
+            extendedFrontMatter={post.extendedFrontMatter}
             toc={post.toc}
           />
         </div>

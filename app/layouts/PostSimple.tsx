@@ -1,46 +1,25 @@
+import type { ExtendedFrontMatter, PrevNext } from "~/lib/utils/mdx.server";
+
 import { Link } from "@remix-run/react";
 import PageTitle from "~/components/PageTitle";
 import SectionContainer from "~/components/SectionContainer";
 import formatDate from "~/lib/utils/formatDate";
 
 export default function PostLayout({
-  frontMatter,
+  extendedFrontMatter,
   authorDetails,
   next,
   prev,
   children,
 }: {
-  frontMatter: {
-    title: string;
-    date: string;
-    draft: boolean;
-    tags: string[];
-    summary: string;
-    images: string[];
-    authors: string[];
-    layout: string;
-    canonicalUrl: string;
-  };
+  extendedFrontMatter: ExtendedFrontMatter;
   authorDetails: any;
-  next: {
-    title: string;
-    slug: string;
-    date: string;
-    tags: string[];
-    draft: boolean;
-    summary: string;
-  } | null;
-  prev: {
-    title: string;
-    slug: string;
-    date: string;
-    tags: string[];
-    draft: boolean;
-    summary: string;
-  } | null;
+  next: PrevNext;
+  prev: PrevNext;
   children: React.ReactNode;
 }): JSX.Element {
-  const { date, title } = frontMatter;
+  // console.log("PostLayout", frontMatter);
+  const { date, title } = extendedFrontMatter;
 
   return (
     <SectionContainer>
