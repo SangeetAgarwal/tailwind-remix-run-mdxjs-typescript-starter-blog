@@ -1,15 +1,23 @@
 import type { LoaderFunction } from "@remix-run/server-runtime";
 import { MDXLayoutRenderer } from "~/components/MDXComponents";
 import PageTitle from "~/components/PageTitle";
+import type { Params } from "@remix-run/react";
 import type { Post } from "~/lib/utils/mdx.server";
 import { getFileBySlug } from "~/lib/utils/mdx.server";
 import { useLoaderData } from "@remix-run/react";
 
-export const loader: LoaderFunction = async ({ params }: { params: any }) => {
+export const loader: LoaderFunction = async ({
+  params,
+}: {
+  params: Params;
+}) => {
   const id = params.blogId;
-  const post = await getFileBySlug("blog", id);
-  return { post };
+  if (id) {
+    const post = await getFileBySlug("blog", id);
+    return { post };
+  }
 };
+
 export default function Blog() {
   const {
     post,

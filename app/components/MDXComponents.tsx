@@ -1,4 +1,8 @@
-import type { ExtendedFrontMatter, FrontMatter, PrevNext, Toc } from "~/lib/utils/mdx.server";
+import type {
+  ExtendedFrontMatter,
+  PrevNext,
+  Toc,
+} from "~/lib/utils/mdx.server";
 
 import { BlogNewsletterForm } from "./NewsletterForm";
 import CustomLink from "./Link";
@@ -34,6 +38,8 @@ export const MDXComponents = {
     return <PostLayout {...rest} />;
   },
 };
+
+// TODO: Pass author details, next and prev from parent component so it is in ...rest
 export const MDXLayoutRenderer = ({
   mdxSource,
   layout,
