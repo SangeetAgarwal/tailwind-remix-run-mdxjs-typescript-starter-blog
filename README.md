@@ -1,4 +1,4 @@
-# Sangeet Agarwal's personal website hosted at <https://bitoflearning-9a57.fly.dev/> (WIP)
+# Sangeet Agarwal's personal website hosted at <https://www.makebitbyte.com> (WIP)
 
 Welcome to my personal website.
 
@@ -14,3 +14,7 @@ Welcome to my personal website.
 ## Licence
 
 [MIT](https://github.com/timlrx/tailwind-nextjs-starter-blog/blob/master/LICENSE) © [Timothy Lin](https://www.timrlx.com)
+
+All the replatformed code which has been rewritten in [remix-run](https://remix.run/) is also licensed 
+under [MIT](https://github.com/SangeetAgarwal/bitoflearning/blob/main/LICENSE)
+
