@@ -28,7 +28,7 @@ module.exports = {
         14: "3.5rem",
       },
       fontFamily: {
-        sans: ["InterVariable", ...defaultTheme.fontFamily.sans],
+        sans: ["Proxima Nova", ...defaultTheme.fontFamily.sans],
       },
       colors: {
         primary: colors.teal,
