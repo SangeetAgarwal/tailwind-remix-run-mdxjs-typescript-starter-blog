@@ -22,9 +22,10 @@ export const meta: MetaFunction = (args: {
   params: Params;
   location: Location;
 }) => {
+  const { posts, siteMetadata } = args.data;
   return {
-    title: "Remix Run starter blog",
-    description: "A blog created with Remix Run and tailwindcss",
+    title: siteMetadata.title,
+    description: siteMetadata.description,
   };
 };
 
@@ -38,13 +39,22 @@ export default function Index() {
   return (
     <>
       <div className="divide-y divide-gray-200 dark:divide-gray-700">
-        <div className="space-y-2 pt-6 pb-8 md:space-y-5">
-          <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
+        <div className="space-y-2 pb-8 pt-6 md:space-y-5">
+          <div className="my-6 flex flex-col items-center gap-x-12 xl:flex-row">
+            <div className="pt-6">
+              <h1 className="pb-6 text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
+                Hi, I’m Sangeet Agarwal
+              </h1>
+              <h2 className="prose mt-2 pt-4 text-lg text-gray-600 dark:text-gray-400">
+                Welcome to my blog - thoughts from a restless mind. I write
+                software, and have expertise on the .net stack as well as on the
+                js eco-system.
+              </h2>
+            </div>
+          </div>
+          <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-5xl md:leading-14">
             Latest
           </h1>
-          <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
-            A blog created with Remix Run and tailwindcss
-          </p>
         </div>
         <ul className="divide-y divide-gray-200 dark:divide-gray-700">
           {!posts.length && "No posts found."}
@@ -109,11 +119,11 @@ export default function Index() {
           </Link>
         </div>
       )}
-      {siteMetadata?.newsletter?.provider != null && (
+      {/* {siteMetadata?.newsletter?.provider != null && (
         <div className="flex items-center justify-center pt-4">
           <NewsletterForm />
         </div>
-      )}
+      )} */}
     </>
   );
 }
