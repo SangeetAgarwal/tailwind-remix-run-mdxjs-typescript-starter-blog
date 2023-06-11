@@ -40,19 +40,19 @@ export default function Index() {
     <>
       <div className="divide-y divide-gray-200 dark:divide-gray-700">
         <div className="space-y-2 pb-8 pt-6 md:space-y-5">
-          <div className="my-6 flex flex-col items-center gap-x-12 xl:flex-row">
-            <div className="pt-6">
-              <h1 className="pb-6 text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
+          <div className="flex flex-col items-center gap-x-12 pb-9 xl:flex-row">
+            <div className="flex flex-col gap-6">
+              <h1 className="text-5xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-5xl md:leading-14">
                 Hi, I’m Sangeet Agarwal
               </h1>
-              <h2 className="prose mt-2 pt-4 text-lg text-gray-600 dark:text-gray-400">
+              <h2 className="prose pt-4 text-lg text-gray-600 dark:text-gray-400">
                 Welcome to my blog - thoughts from a restless mind. I write
                 software, and have expertise on the .net stack as well as on the
                 js eco-system.
               </h2>
             </div>
           </div>
-          <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-5xl md:leading-14">
+          <h1 className="font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-5xl md:leading-14">
             Latest
           </h1>
         </div>
