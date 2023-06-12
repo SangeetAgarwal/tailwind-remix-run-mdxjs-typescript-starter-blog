@@ -13,6 +13,16 @@ import Tag from "~/components/Tag";
 import formatDate from "~/lib/utils/formatDate";
 import { getAllFilesFrontMatter } from "~/lib/utils/mdx.server";
 import { siteMetadata } from "~/utils/siteMetadata";
+import { getSeo, getSeoMeta } from "~/seo";
+
+export let meta = (context: any) => {
+  let seoMeta = getSeoMeta({
+    title: "Home",
+  });
+  return {
+    ...seoMeta,
+  };
+};
 
 export const loader: LoaderFunction = async () => {
   const posts = await getAllFilesFrontMatter("blog");

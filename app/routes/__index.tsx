@@ -111,7 +111,7 @@ export default function Index() {
           <div> • </div>
           <div>© 2023</div>
           <div> • </div>
-          <a href="https://www.timlrx.com/">MakeBitByte</a>
+          <a href="https://www.makebitbyte.com/">MakeBitByte</a>
         </div>
         <div className="mb-8 text-sm text-gray-500 dark:text-gray-400">
           <a
