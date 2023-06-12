@@ -124,7 +124,7 @@ export async function getFileBySlug(type: string, slug: string) {
 
   const remarkCodeTitles = () => {
     return (tree: any) =>
-      visit(tree, "code", (node, index, parent) => {
+      visit(tree, "code", (node: any, index: any, parent: any) => {
         const nodeLang = node.lang || "";
         let language = "";
         let title = "";
@@ -156,7 +156,7 @@ export async function getFileBySlug(type: string, slug: string) {
   };
   const remarkTocHeadings = (options: { exportRef: Toc[] }) => {
     return (tree: any) => {
-      return visit(tree, "heading", (node, index, parent) => {
+      return visit(tree, "heading", (node: any, index: any, parent: any) => {
         const textContent = toString(node);
         options.exportRef.push({
           value: textContent,
@@ -273,6 +273,8 @@ export async function getFileBySlug(type: string, slug: string) {
       fileName: fs.existsSync(mdxPath) ? `${slug}.mdx` : `${slug}.md`,
       ...frontmatter,
       date: frontmatter.date ? new Date(frontmatter.date).toISOString() : null,
+      title: frontmatter.title,
+      description: frontmatter.summary,
     },
   };
 }
