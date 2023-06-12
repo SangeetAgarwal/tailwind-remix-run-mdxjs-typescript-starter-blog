@@ -15,16 +15,19 @@ import type {
 import { getUser } from "./session.server";
 import { json } from "@remix-run/node";
 import tailwindStylesheetUrl from "./styles/tailwind.css";
+import { getSeo } from "~/seo";
 
-export const links: LinksFunction = () => {
-  return [{ rel: "stylesheet", href: tailwindStylesheetUrl }];
-};
+let [seoMeta, seoLinks] = getSeo();
 
 export const meta: MetaFunction = () => ({
+  ...seoMeta,
   charset: "utf-8",
-  title: "MakeBitByte",
   viewport: "width=device-width,initial-scale=1",
 });
+
+export const links: LinksFunction = () => {
+  return [{ ...seoLinks, rel: "stylesheet", href: tailwindStylesheetUrl }];
+};
 
 type LoaderData = {
   user: Awaited<ReturnType<typeof getUser>>;

@@ -7,27 +7,12 @@ import { Link, useLoaderData } from "@remix-run/react";
 
 import type { AllFrontMatter } from "~/lib/utils/mdx.server";
 import type { Key } from "react";
-import type { Location } from "history";
 import NewsletterForm from "~/components/NewsletterForm";
 import type { Params } from "@remix-run/react";
-import type { RouteData } from "@remix-run/server-runtime/dist/routeData";
 import Tag from "~/components/Tag";
 import formatDate from "~/lib/utils/formatDate";
 import { getAllFilesFrontMatter } from "~/lib/utils/mdx.server";
 import { siteMetadata } from "~/utils/siteMetadata";
-
-export const meta: MetaFunction = (args: {
-  data: AppData;
-  parentsData: RouteData;
-  params: Params;
-  location: Location;
-}) => {
-  const { posts, siteMetadata } = args.data;
-  return {
-    title: siteMetadata.title,
-    description: siteMetadata.description,
-  };
-};
 
 export const loader: LoaderFunction = async () => {
   const posts = await getAllFilesFrontMatter("blog");
@@ -52,7 +37,7 @@ export default function Index() {
               </h2>
             </div>
           </div>
-          <h1 className="font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-5xl md:leading-14">
+          <h1 className="font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-4xl md:leading-14">
             Latest
           </h1>
         </div>
