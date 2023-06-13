@@ -12,7 +12,6 @@ import type {
   MetaFunction,
 } from "@remix-run/node";
 
-import { getUser } from "./session.server";
 import { json } from "@remix-run/node";
 import tailwindStylesheetUrl from "./styles/tailwind.css";
 import { getSeo } from "~/seo";
@@ -27,16 +26,6 @@ export const meta: MetaFunction = () => ({
 
 export const links: LinksFunction = () => {
   return [{ ...seoLinks, rel: "stylesheet", href: tailwindStylesheetUrl }];
-};
-
-type LoaderData = {
-  user: Awaited<ReturnType<typeof getUser>>;
-};
-
-export const loader: LoaderFunction = async ({ request }) => {
-  return json<LoaderData>({
-    user: await getUser(request),
-  });
 };
 
 export default function App() {

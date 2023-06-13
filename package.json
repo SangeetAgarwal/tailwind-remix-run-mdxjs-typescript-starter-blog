@@ -10,7 +10,6 @@
     "dev:remix": "cross-env NODE_ENV=development binode --require ./mocks -- @remix-run/dev:remix dev",
     "format": "prettier --write .",
     "lint": "eslint --cache --cache-location ./node_modules/.cache/eslint .",
-    "setup": "prisma generate && prisma migrate deploy && prisma db seed",
     "start": "remix-serve build",
     "start:mocks": "binode --require ./mocks -- @remix-run/serve:remix-serve build",
     "test": "vitest",
@@ -27,7 +26,6 @@
     "/public/build"
   ],
   "dependencies": {
-    "@prisma/client": "^4.1.0",
     "@remix-run/node": "^1.17.0",
     "@remix-run/react": "^1.17.0",
     "@remix-run/serve": "^1.17.0",
@@ -87,7 +85,6 @@
     "postcss": "^8.4.14",
     "prettier": "^2.6.2",
     "prettier-plugin-tailwindcss": "^0.1.13",
-    "prisma": "^4.1.0",
     "start-server-and-test": "^1.14.0",
     "tailwindcss": "^3.3.2",
     "ts-node": "^10.8.1",
@@ -99,8 +96,5 @@
   },
   "engines": {
     "node": ">=14"
-  },
-  "prisma": {
-    "seed": "node --require tsconfig-paths/register prisma/seed.js"
   }
 }
