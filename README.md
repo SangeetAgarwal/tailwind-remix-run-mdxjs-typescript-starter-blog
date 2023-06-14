@@ -22,7 +22,7 @@
 - **TOC component**
 - **Server-side syntax highlighting with line numbers and line highlighting via** [rehype-prism-plus](https://github.com/timlrx/rehype-prism-plus)
 - **Citation and bibliography support via** [rehype-citation](https://github.com/timlrx/rehype-citation)
-- **Auto adds add `id`s to headings using** [rehype-slug](https://github.com/rehypejs/rehype-slug)
+- **Auto adds `id`s to headings using** [rehype-slug](https://github.com/rehypejs/rehype-slug)
 
 ## Credits and Inspiration
 
