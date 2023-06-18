@@ -1,13 +1,6 @@
-# Sangeet Agarwal's personal website hosted at <https://www.makebitbyte.com>
+# Tailwind Remix-run MDX.js Starter Blog
 
-### Work in progress...
-
-## Welcome to my personal website.
-
-- **Made** with [Remix's](https://remix.run/) [indie stack](https://github.com/remix-run/indie-stack) and re-platformed from [Tailwind Nextjs starter Blog](https://github.com/timlrx/tailwind-nextjs-starter-blog) template.
-  - **Styling** with [Tailwind CSS](https://tailwindcss.com)
-  - **Hosted** by [fly](https://fly.io)
-  - **Writing** articles with [MDX](https://mdxjs.com/)
+This is a [Remix-run](https://remix.run/), [Tailwind CSS](https://tailwindcss.com/), typescript blogging starter template. Easily the most feature-rich Remix-run markdown blogging template in existence. Comes with built-in features that are very customizable to make the process of writing technical blogs super easy. Perfect as a replacement to existing Jekyll and Hugo individual blogs.
 
 ## Features
 
