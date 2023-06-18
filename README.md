@@ -1,6 +1,10 @@
 # Tailwind Remix-run MDX.js Starter Blog
 
-This is a [Remix-run](https://remix.run/), [Tailwind CSS](https://tailwindcss.com/), typescript blogging starter template. Easily the most feature-rich Remix-run markdown blogging template in existence. Comes with built-in features that are very customizable to make the process of writing technical blogs super easy. Perfect as a replacement to existing Jekyll and Hugo individual blogs.
+This is a [Remix-run](https://remix.run/), [Tailwind CSS](https://tailwindcss.com/), typescript blogging starter template. Easily the most feature rich Remix-run markdown blogging template in existence. Comes with built-in features that are very customizable to make the process of writing technical blogs super easy. Perfect as a replacement to existing Jekyll and Hugo individual blogs.
+
+## Examples
+- [Demo Blog](https://tailwind-remix-run-mdxjs-typescript-starter-blog.fly.dev/) - this repository that is run on [fly.io](https://fly.io/)
+- [My personal blog](https://www.makebitbyte.com/)
 
 ## Features
 
