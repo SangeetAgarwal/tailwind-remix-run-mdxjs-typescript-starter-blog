@@ -1,4 +1,4 @@
-app = "bitoflearning-9a57"
+app = "tailwind-remix-run-mdxjs-typescript-starter-blog"
 
 kill_signal = "SIGINT"
 kill_timeout = 5
