@@ -13,21 +13,11 @@ export default function Footer() {
     <footer>
       <div className="mt-16 flex flex-col items-center">
         <div className="mb-3 flex space-x-4">
-          {/* <SocialIcon
-            kind="mail"
-            href={`mailto:${siteMetadata.email}`}
-            size={6}
-          /> */}
-          {/* <SocialIcon kind="github" href={siteMetadata.github} size={6} />
-          <SocialIcon kind="facebook" href={siteMetadata.facebook} size={6} />
-          <SocialIcon kind="youtube" href={siteMetadata.youtube} size={6} />
-          <SocialIcon kind="linkedin" href={siteMetadata.linkedin} size={6} />
-          <SocialIcon kind="twitter" href={siteMetadata.twitter} size={6} /> */}
           <a
             className="text-sm text-gray-500 transition hover:text-gray-600"
             target="_blank"
             rel="noopener noreferrer"
-            href="mailto:sangeet.m.agarwal@gmail.com"
+            href={`mailto:${siteMetadata.email}`}
           >
             <span className="sr-only">mail</span>
             <svg
@@ -43,7 +33,7 @@ export default function Footer() {
             className="text-sm text-gray-500 transition hover:text-gray-600"
             target="_blank"
             rel="noopener noreferrer"
-            href="https://github.com/sangeetagarwal"
+            href={siteMetadata.github}
           >
             <span className="sr-only">github</span>
             <svg
@@ -58,7 +48,7 @@ export default function Footer() {
             className="text-sm text-gray-500 transition hover:text-gray-600"
             target="_blank"
             rel="noopener noreferrer"
-            href="https://www.linkedin.com/in/sangeetagarwal"
+            href={siteMetadata.linkedin}
           >
             <span className="sr-only">linkedin</span>
             <svg
@@ -73,7 +63,37 @@ export default function Footer() {
             className="text-sm text-gray-500 transition hover:text-gray-600"
             target="_blank"
             rel="noopener noreferrer"
-            href="https://twitter.com/SangyMohan"
+            href={siteMetadata.facebook}
+          >
+            <span className="sr-only">facebook</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              className="h-6 w-6 fill-current text-gray-700 hover:text-blue-500 dark:text-gray-200 dark:hover:text-blue-400"
+            >
+              <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"></path>
+            </svg>
+          </a>
+          <a
+            className="text-sm text-gray-500 transition hover:text-gray-600"
+            target="_blank"
+            rel="noopener noreferrer"
+            href={siteMetadata.youtube}
+          >
+            <span className="sr-only">youtube</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              className="h-6 w-6 fill-current text-gray-700 hover:text-blue-500 dark:text-gray-200 dark:hover:text-blue-400"
+            >
+              <path d="M23.499 6.203a3.008 3.008 0 0 0-2.089-2.089c-1.87-.501-9.4-.501-9.4-.501s-7.509-.01-9.399.501a3.008 3.008 0 0 0-2.088 2.09A31.258 31.26 0 0 0 0 12.01a31.258 31.26 0 0 0 .523 5.785 3.008 3.008 0 0 0 2.088 2.089c1.869.502 9.4.502 9.4.502s7.508 0 9.399-.502a3.008 3.008 0 0 0 2.089-2.09 31.258 31.26 0 0 0 .5-5.784 31.258 31.26 0 0 0-.5-5.808zm-13.891 9.4V8.407l6.266 3.604z"></path>
+            </svg>
+          </a>
+          <a
+            className="text-sm text-gray-500 transition hover:text-gray-600"
+            target="_blank"
+            rel="noopener noreferrer"
+            href={siteMetadata.twitter}
           >
             <span className="sr-only">twitter</span>
             <svg
@@ -90,10 +110,10 @@ export default function Footer() {
           <div>{` • `}</div>
           <div>{`© ${new Date().getFullYear()}`}</div>
           <div>{` • `}</div>
-          <Link href="/">{siteMetadata.title}</Link>
+          <Link href="/">Tailwind Remix-run Starter Blog</Link>
         </div>
         <div className="mb-8 text-sm text-gray-500 dark:text-gray-400">
-          <Link href="https://github.com/SangeetAgarwal/bitoflearning">
+          <Link href="https://github.com/SangeetAgarwal/tailwind-remix-run-mdxjs-typescript-starter-blog">
             Tailwind Remix-run Theme
           </Link>
         </div>

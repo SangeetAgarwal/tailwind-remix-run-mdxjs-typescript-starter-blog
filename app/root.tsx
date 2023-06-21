@@ -25,7 +25,39 @@ export const meta: MetaFunction = () => ({
 });
 
 export const links: LinksFunction = () => {
-  return [{ ...seoLinks, rel: "stylesheet", href: tailwindStylesheetUrl }];
+  return [
+    ...seoLinks,
+    { rel: "stylesheet", href: tailwindStylesheetUrl },
+    {
+      rel: "android-chrome-96x96",
+      type: "image/png",
+      sizes: "96x96",
+      href: "/android-chrome-96x96.png",
+    },
+    {
+      rel: "apple-touch-icon",
+      type: "image/png",
+      sizes: "180x180",
+      href: "/apple-touch-icon.png",
+    },
+    {
+      rel: "icon",
+      type: "image/png",
+      sizes: "32x32",
+      href: "/favicon-32x32.png",
+    },
+    {
+      rel: "icon",
+      type: "image/png",
+      sizes: "16x16",
+      href: "/favicon-16x16.png",
+    },
+    {
+      rel: "icon",
+      type: "image/x-icon",
+      href: "/favicon.ico",
+    },
+  ];
 };
 
 export default function App() {

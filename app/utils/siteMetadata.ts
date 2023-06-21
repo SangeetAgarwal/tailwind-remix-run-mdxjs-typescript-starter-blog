@@ -1,7 +1,7 @@
 const siteMetadata = {
-  title: "MakeBitByte",
-  author: "Sangeet Agarwal",
-  headerTitle: "MakeBitByte",
+  title: "TailwindRemixBlog",
+  author: "Heads Watzang",
+  headerTitle: "TailwindRemixBlog",
   description: "A blog created with Remix-run and Tailwind.css",
   language: "en-us",
   theme: "system", // system, dark or light
