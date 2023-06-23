@@ -1,10 +1,3 @@
-import type {
-  AuthorFrontMatter,
-  ExtendedFrontMatter,
-  PrevNext,
-  Toc,
-} from "~/lib/mdx.server";
-
 import { BlogNewsletterForm } from "./NewsletterForm";
 import CustomLink from "./Link";
 import Image from "./Image";
@@ -15,6 +8,12 @@ import TOCInline from "./TOCInline";
 import { getMDXComponent } from "mdx-bundler/client";
 import { useMemo } from "react";
 import AuthorLayout from "~/layouts/AuthorLayout";
+import {
+  AuthorFrontMatter,
+  ExtendedFrontMatter,
+  PrevNext,
+  Toc,
+} from "~/lib/types";
 
 export const MDXComponents = {
   Image,

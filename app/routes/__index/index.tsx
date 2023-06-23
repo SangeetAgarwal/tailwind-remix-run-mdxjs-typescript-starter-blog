@@ -4,8 +4,6 @@ import type {
   MetaFunction,
 } from "@remix-run/server-runtime";
 import { Link, useLoaderData } from "@remix-run/react";
-
-import type { AllFrontMatter } from "~/lib/mdx.server";
 import type { Key } from "react";
 import NewsletterForm from "~/components/NewsletterForm";
 import type { Params } from "@remix-run/react";
@@ -14,6 +12,7 @@ import formatDate from "~/lib/utils/formatDate";
 import { getAllFilesFrontMatter } from "~/lib/mdx.server";
 import { siteMetadata } from "~/utils/siteMetadata";
 import { getSeo, getSeoMeta } from "~/seo";
+import { AllFrontMatter } from "~/lib/types";
 
 export let meta = (context: any) => {
   let seoMeta = getSeoMeta({
@@ -65,7 +64,7 @@ export default function Index() {
                         <div>
                           <h2 className="text-2xl font-bold leading-8 tracking-tight">
                             <Link
-                              to={`/blogs/${slug}`}
+                              to={`/blog/${slug}`}
                               className="text-gray-900 dark:text-gray-100"
                             >
                               {title}
@@ -83,7 +82,7 @@ export default function Index() {
                       </div>
                       <div className="text-base font-medium leading-6">
                         <Link
-                          to={`/blogs/${slug}`}
+                          to={`/blog/${slug}`}
                           className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
                           aria-label={`Read "${title}"`}
                         >

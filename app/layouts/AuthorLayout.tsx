@@ -1,9 +1,4 @@
-import type { AuthorFrontMatter } from "~/lib/mdx.server";
-
-import { Link } from "@remix-run/react";
-import PageTitle from "~/components/PageTitle";
-import SectionContainer from "~/components/SectionContainer";
-import formatDate from "~/lib/utils/formatDate";
+import { AuthorFrontMatter } from "~/lib/types";
 
 export default function AuthorLayout({
   authorFrontMatter,

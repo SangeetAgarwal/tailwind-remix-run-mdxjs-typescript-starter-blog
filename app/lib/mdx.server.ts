@@ -6,65 +6,11 @@ import matter from "gray-matter";
 import path from "path";
 import readingTime from "reading-time";
 import remarkExtractFrontmatter from "./remark-extract-frontmatter";
-
-export type Toc = { value: string; url: string; depth: number };
-
-export type AllFrontMatter = FrontMatter & {
-  slug: string;
-  date: string;
-};
-
-export type PrevNext = {
-  title: string;
-  slug: string;
-  date: string;
-  tags: string[];
-  draft: boolean;
-  summary: string;
-};
-
-export type FrontMatter = {
-  title: string;
-  date: string;
-  lastmod: string;
-  draft: boolean;
-  tags: string[];
-  summary: string;
-  images: string[];
-  authors: string[];
-  layout: string;
-  canonicalUrl: string;
-};
-
-export type AuthorFrontMatter = {
-  name: string;
-  avatar: string;
-  occupation: string;
-  company: string;
-  email: string;
-  twitter: string;
-  linkedin: string;
-  github: string;
-};
-
-export type ExtendedFrontMatter = FrontMatter & {
-  readingTime: IReadTimeResults;
-  slug: string | null;
-  fileName: string;
-  draft: boolean;
-  date: string;
-};
-
-export type Post = {
-  mdxSource: string;
-  toc: Toc[];
-  extendedFrontMatter: ExtendedFrontMatter;
-  layout: string | null;
-};
+import { Toc } from "./types";
 
 const root = process.cwd();
 export function getFiles(type: string) {
-  const prefixPaths = path.join(root, "data", type);
+  const prefixPaths = path.join(root, "app", "data", type);
   const files = getAllFilesRecursively(prefixPaths);
   // Only want to return blog/path and ignore root, replace is needed to work on Windows
   return files.map((file: string) =>
