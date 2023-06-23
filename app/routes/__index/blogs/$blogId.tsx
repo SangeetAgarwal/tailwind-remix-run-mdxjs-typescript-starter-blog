@@ -2,8 +2,8 @@ import { json, type LoaderFunction } from "@remix-run/server-runtime";
 import { MDXLayoutRenderer } from "~/components/MDXComponents";
 import PageTitle from "~/components/PageTitle";
 import type { Params } from "@remix-run/react";
-import type { Post } from "~/lib/utils/mdx.server";
-import { getFileBySlug } from "~/lib/utils/mdx.server";
+import type { Post } from "~/lib/mdx.server";
+import { getFileBySlug } from "~/lib/mdx.server";
 import { useLoaderData } from "@remix-run/react";
 import { getSeo, getSeoMeta, getSeoLinks } from "~/seo";
 

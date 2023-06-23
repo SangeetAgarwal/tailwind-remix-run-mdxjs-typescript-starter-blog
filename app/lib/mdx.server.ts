@@ -1,7 +1,7 @@
 import type { IReadTimeResults } from "reading-time";
 import { bundleMDX } from "mdx-bundler";
 import fs from "fs";
-import getAllFilesRecursively from "./files";
+import getAllFilesRecursively from "./utils/files";
 import matter from "gray-matter";
 import path from "path";
 import readingTime from "reading-time";
@@ -34,6 +34,17 @@ export type FrontMatter = {
   authors: string[];
   layout: string;
   canonicalUrl: string;
+};
+
+export type AuthorFrontMatter = {
+  name: string;
+  avatar: string;
+  occupation: string;
+  company: string;
+  email: string;
+  twitter: string;
+  linkedin: string;
+  github: string;
 };
 
 export type ExtendedFrontMatter = FrontMatter & {
@@ -275,6 +286,16 @@ export async function getFileBySlug(type: string, slug: string) {
       date: frontmatter.date ? new Date(frontmatter.date).toISOString() : null,
       title: frontmatter.title,
       description: frontmatter.summary,
+    },
+    authorFrontMatter: {
+      name: frontmatter.name ? frontmatter.name : null,
+      avatar: frontmatter.avatar ? frontmatter.avatar : null,
+      occupation: frontmatter.occupation ? frontmatter.occupation : null,
+      company: frontmatter.company ? frontmatter.company : null,
+      email: frontmatter.email ? frontmatter.email : null,
+      twitter: frontmatter.twitter ? frontmatter.twitter : null,
+      linkedin: frontmatter.linkedin ? frontmatter.linkedin : null,
+      github: frontmatter.github ?? null,
     },
   };
 }

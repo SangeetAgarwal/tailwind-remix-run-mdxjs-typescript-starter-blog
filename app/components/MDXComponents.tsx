@@ -1,18 +1,20 @@
 import type {
+  AuthorFrontMatter,
   ExtendedFrontMatter,
   PrevNext,
   Toc,
-} from "~/lib/utils/mdx.server";
+} from "~/lib/mdx.server";
 
 import { BlogNewsletterForm } from "./NewsletterForm";
 import CustomLink from "./Link";
 import Image from "./Image";
 import type { MDXContentProps } from "mdx-bundler/client";
-import PostLayout from "~/layouts/PostSimple";
+import PostSimple from "~/layouts/PostSimple";
 import Pre from "./Pre";
 import TOCInline from "./TOCInline";
 import { getMDXComponent } from "mdx-bundler/client";
 import { useMemo } from "react";
+import AuthorLayout from "~/layouts/AuthorLayout";
 
 export const MDXComponents = {
   Image,
@@ -23,11 +25,14 @@ export const MDXComponents = {
   wrapper: ({
     components,
     layout,
+    authorFrontMatter,
+    children,
     ...rest
   }: {
     components: MDXContentProps;
     layout: string;
     extendedFrontMatter: ExtendedFrontMatter;
+    authorFrontMatter: AuthorFrontMatter;
     authorDetails: any;
     next: PrevNext;
     prev: PrevNext;
@@ -35,7 +40,17 @@ export const MDXComponents = {
   }) => {
     // const Layout = require(`~/layouts/${layout}`).default
     // return <Layout {...rest} />
-    return <PostLayout {...rest} />;
+    switch (layout) {
+      case "PostSimple":
+        return <PostSimple children={children} {...rest} />;
+      case "AuthorLayout":
+        return (
+          <AuthorLayout
+            authorFrontMatter={authorFrontMatter}
+            children={children}
+          />
+        );
+    }
   },
 };
 
@@ -47,8 +62,9 @@ export const MDXLayoutRenderer = ({
 }: {
   mdxSource: string;
   layout: string;
-  extendedFrontMatter: ExtendedFrontMatter;
-  toc: Toc[];
+  extendedFrontMatter?: ExtendedFrontMatter;
+  toc?: Toc[];
+  authorFrontMatter?: AuthorFrontMatter;
 }) => {
   const MDXLayout = useMemo(() => getMDXComponent(mdxSource), [mdxSource]);
   return (

@@ -5,13 +5,13 @@ import type {
 } from "@remix-run/server-runtime";
 import { Link, useLoaderData } from "@remix-run/react";
 
-import type { AllFrontMatter } from "~/lib/utils/mdx.server";
+import type { AllFrontMatter } from "~/lib/mdx.server";
 import type { Key } from "react";
 import NewsletterForm from "~/components/NewsletterForm";
 import type { Params } from "@remix-run/react";
 import Tag from "~/components/Tag";
 import formatDate from "~/lib/utils/formatDate";
-import { getAllFilesFrontMatter } from "~/lib/utils/mdx.server";
+import { getAllFilesFrontMatter } from "~/lib/mdx.server";
 import { siteMetadata } from "~/utils/siteMetadata";
 import { getSeo, getSeoMeta } from "~/seo";
 
