@@ -1,8 +1,6 @@
 import { json, type LoaderFunction } from "@remix-run/server-runtime";
-import { MDXLayoutRenderer } from "~/components/MDXComponents";
-import PageTitle from "~/components/PageTitle";
 import type { Params } from "@remix-run/react";
-import { getAllFilesFrontMatter, getFileBySlug } from "~/lib/mdx.server";
+import { getAllFilesFrontMatter } from "~/lib/mdx.server";
 import { useLoaderData } from "@remix-run/react";
 import { getSeo, getSeoMeta, getSeoLinks } from "~/seo";
 import { AllFrontMatter } from "~/lib/types";

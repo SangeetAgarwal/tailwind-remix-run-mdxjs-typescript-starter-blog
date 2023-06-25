@@ -1,41 +1,34 @@
 import { json, type LoaderFunction } from "@remix-run/server-runtime";
-import { MDXLayoutRenderer } from "~/components/MDXComponents";
-import PageTitle from "~/components/PageTitle";
-import type { Params } from "@remix-run/react";
-import { getFileBySlug } from "~/lib/mdx.server";
+import { getAllFilesFrontMatter } from "~/lib/mdx.server";
 import { useLoaderData } from "@remix-run/react";
 import { getSeo, getSeoMeta, getSeoLinks } from "~/seo";
+import { ExtendedFrontMatter } from "~/lib/types";
+import ListLayout from "~/layouts/ListLayout";
+import { siteMetadata } from "~/utils/siteMetadata";
 
-// export let meta = (context: any) => {
-//   let seoMeta = getSeoMeta({
-//     title: context.data.extendedFrontMatter.title,
-//     description: context.data.extendedFrontMatter.description,
-//   });
-//   return {
-//     ...seoMeta,
-//   };
-// };
+export let meta = (context: any) => {
+  console.log(context.params);
+  let seoMeta = getSeoMeta({
+    title: `Blog - ${siteMetadata.author}`,
+    description: `${siteMetadata.description}`,
+  });
+  return {
+    ...seoMeta,
+  };
+};
 
-export const loader: LoaderFunction = async ({
-  params,
-}: {
-  params: Params;
-}) => {
-  const id = params.tagId;
-  return json({ id });
+export const loader: LoaderFunction = async () => {
+  const allFrontMatters = (await getAllFilesFrontMatter(
+    "blog"
+  )) as unknown as ExtendedFrontMatter[];
+  return json(allFrontMatters);
 };
 
 export default function Blog() {
+  const allFrontMatters = useLoaderData() as unknown as ExtendedFrontMatter[];
   return (
     <>
-      <div className="mt-24 text-center">
-        <PageTitle>
-          Under Construction{" "}
-          <span role="img" aria-label="roadwork sign">
-            🚧
-          </span>
-        </PageTitle>
-      </div>
+      <ListLayout frontMatters={allFrontMatters} title={"All Posts"} />
     </>
   );
 }
