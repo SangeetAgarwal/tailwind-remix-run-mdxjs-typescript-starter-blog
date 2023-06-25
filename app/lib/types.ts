@@ -44,8 +44,6 @@ export type ExtendedFrontMatter = FrontMatter & {
   readingTime: IReadTimeResults;
   slug: string | null;
   fileName: string;
-  draft: boolean;
-  date: string;
 };
 
 export type Post = {
@@ -53,4 +51,5 @@ export type Post = {
   toc: Toc[];
   extendedFrontMatter: ExtendedFrontMatter;
   layout: string | null;
+  authorFrontMatter: AuthorFrontMatter;
 };
