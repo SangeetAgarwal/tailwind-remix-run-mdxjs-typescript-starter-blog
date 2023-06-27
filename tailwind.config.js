@@ -6,13 +6,6 @@ module.exports = {
   experimental: {
     optimizeUniversalDefaults: false,
   },
-  // content: [
-  //   './pages/**/*.js',
-  //   './components/**/*.js',
-  //   './layouts/**/*.js',
-  //   './lib/**/*.js',
-  //   './data/**/*.mdx',
-  // ],
 
   content: ["./app/**/*.{ts,tsx,jsx,js}"],
   darkMode: "class",

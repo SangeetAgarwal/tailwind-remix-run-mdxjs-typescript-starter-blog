@@ -45,8 +45,8 @@ export const MDXComponents = {
       case "AuthorLayout":
         return (
           <AuthorLayout
-            authorFrontMatter={authorFrontMatter}
             children={children}
+            authorFrontMatter={authorFrontMatter}
           />
         );
     }

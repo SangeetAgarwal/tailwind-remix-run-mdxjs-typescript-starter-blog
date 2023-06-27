@@ -1,4 +1,3 @@
-import type { IReadTimeResults } from "reading-time";
 import { bundleMDX } from "mdx-bundler";
 import fs from "fs";
 import getAllFilesRecursively from "./utils/files";
@@ -9,6 +8,7 @@ import remarkExtractFrontmatter from "./remark-extract-frontmatter";
 import { Toc } from "./types";
 
 const root = process.cwd();
+
 export function getFiles(type: string) {
   const prefixPaths = path.join(root, "app", "data", type);
   const files = getAllFilesRecursively(prefixPaths);
@@ -65,7 +65,7 @@ export function dateSortDesc(
 
 export async function getFileBySlug(type: string, slug: string) {
   const remarkExtractFrontmatterThen = await remarkExtractFrontmatter();
-
+  const { default: rehypeSlug } = await import("rehype-slug");
   const BananaSlug = (await import("github-slugger")).default;
   const { toString } = await import("mdast-util-to-string");
   const { visit } = await import("unist-util-visit");
@@ -111,6 +111,7 @@ export async function getFileBySlug(type: string, slug: string) {
         node.lang = language;
       });
   };
+
   const remarkTocHeadings = (options: { exportRef: Toc[] }) => {
     return (tree: any) => {
       return visit(tree, "heading", (node: any, index: any, parent: any) => {
@@ -123,7 +124,6 @@ export async function getFileBySlug(type: string, slug: string) {
       });
     };
   };
-  const { default: rehypeSlug } = await import("rehype-slug");
 
   const mdxPath = path.join(root, "app", "data", type, `${slug}.mdx`);
   const mdPath = path.join(root, "app", "data", type, `${slug}.md`);

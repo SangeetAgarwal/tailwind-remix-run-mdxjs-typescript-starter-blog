@@ -1,0 +1,248 @@
+---
+title: "Features in v1"
+date: 2023-06-25T17:32:14Z
+lastmod: "2023-06-25"
+tags: ["Remix-run", "tailwind", "guide"]
+draft: false
+summary: "An overview of the features released in v1 - code block copy, frontmatter layout and more"
+layout: PostSimple
+bibliography: references-data.bib
+canonicalUrl: https://tailwind-nextjs-starter-blog.vercel.app/blog/features-in-v1/
+---
+
+## Overview
+
+A post on the features in v1.0:
+
+<TOCInline toc={props.toc} exclude="Overview" toHeading={2} />
+
+{/* <TOCInline toc={props.toc} asDisclosure /> */}
+
+## Theme colors
+
+You can easily modify the theme color by changing the primary attribute in the tailwind config file:
+
+```js:tailwind.config.js
+theme: {
+    colors: {
+      primary: colors.teal,
+      gray: colors.neutral,
+      ...
+    }
+  ...
+}
+```
+
+The primary color attribute should be assigned an object with keys from 50, 100, 200 ... 900 and the corresponding color code values.
+
+Tailwind includes great default color palettes that can be used for theming your own website. Check out [customizing colors documentation page](https://tailwindcss.com/docs/customizing-colors) for the full range of options.
+
+## Xdm MDX compiler
+
+We use [mdx-bundler](https://github.com/kentcdodds/mdx-bundler) which uses [xdm](https://github.com/wooorm/xdm) under the hood, the latest micromark 3 and remark, rehype libraries.
+
+This allows loading components directly in the mdx file using the import syntax and including js code which could be compiled and bundled at the build step.
+
+For example, the following jsx snippet can be used directly in an MDX file to render the page title component:
+
+```jsx
+import PageTitle from "./PageTitle.js";
+<PageTitle> Using JSX components in MDX </PageTitle>;
+```
+
+import PageTitle from "./PageTitle.js";
+
+<PageTitle> Using JSX components in MDX </PageTitle>
+
+The default configuration resolves all components relative to the `components` directory.
+
+## Table of contents component
+
+Inspired by [Docusaurus](https://docusaurus.io/docs/next/markdown-features/inline-toc) and Gatsby's [gatsby-remark-table-of-contents](https://www.gatsbyjs.com/plugins/gatsby-remark-table-of-contents/),
+the `toc` variable containing all the top level headings of the document is passed to the MDX file and can be styled accordingly.
+To make generating a table of contents (TOC) simple, you can use the existing `TOCInline` component.
+
+For example, the TOC in this post was generated with the following code:
+
+```jsx
+<TOCInline toc={props.toc} exclude="Overview" toHeading={2} />
+```
+
+You can customise the headings that are displayed by configuring the `fromHeading` and `toHeading` props, or exclude particular headings
+by passing a string or a string array to the `exclude` prop. By default, all headings that are of depth 3 or smaller are indented. This can be configured by changing the `indentDepth` property.
+A `asDisclosure` prop can be used to render the TOC within an expandable disclosure element.
+
+Here's the full TOC rendered in a disclosure element.
+
+```jsx
+<TOCInline toc={props.toc} asDisclosure />
+```
+
+<TOCInline toc={props.toc} asDisclosure />
+
+## Layouts
+
+You can map mdx blog content to layout components by configuring the frontmatter field. For example, this post is written with the `PostSimple` layout!
+
+### Adding new templates
+
+layout templates are stored in the `./layouts` folder. You can add your React components that you want to map to markdown content in this folder.
+The component file name must match that specified in the markdown frontmatter `layout` field.
+
+The only required field is `children` which contains the rendered MDX content, though you'll want to pass in the frontMatter contents and render it in the template.
+
+Here's an example layout which you can further customise:
+
+```jsx
+export default function ExampleLayout({ frontMatter, children }) {
+  const { date, title } = frontMatter;
+
+  return (
+    <SectionContainer>
+      <div>{date}</div>
+      <h1>{title}</h1>
+      <div>{children}</div>
+    </SectionContainer>
+  );
+}
+```
+
+### Configuring a blog post frontmatter
+
+Use the `layout` frontmatter field to specify the template you want to map the markdown post to. Here's how the frontmatter of this post looks like:
+
+```
+---
+title: 'New features in v1'
+date: '2021-05-26   '
+tags: ['remix-run', 'tailwind', 'guide']
+draft: false
+summary: 'Introducing the new layout features - you can map mdx blog content to layout components by configuring the frontmatter field'
+layout: PostSimple
+---
+```
+
+You can configure the default layout in the respective page section by modifying the `DEFAULT_LAYOUT` variable.
+The `DEFAULT_LAYOUT` for blog posts page is set to `PostSimple`.
+
+### Extend
+
+`layout` is mapped to wrapper which wraps the entire MDX content.
+
+I do have a rather ugly switch statment in the `MDXComponents.tsx` so each time you add a new layout template you must add it to the switch statment.
+
+I have struggled with adding dynamic `require` in Remix so this will have to do for now.
+
+```jsx
+switch (layout) {
+  case "PostSimple":
+    return <PostSimple children={children} {...rest} />;
+  case "AuthorLayout":
+    return (
+      <AuthorLayout children={children} authorFrontMatter={authorFrontMatter} />
+    );
+  case "ExampleLayout":
+    return <ExampleLayout children={children} {...rest} />;
+}
+```
+
+Use the `MDXLayoutRenderer` component on a page where you want to accept a layout name to map to the desired layout. You need to pass the layout name from the layout folder (it has to be an exact match).
+
+```jsx
+export const MDXLayoutRenderer = ({ layout, mdxSource, ...rest }) => {
+  const MDXLayout = useMemo(() => getMDXComponent(mdxSource), [mdxSource]);
+
+  return <MDXLayout layout={layout} components={MDXComponents} {...rest} />;
+};
+```
+
+## Copy button for code blocks
+
+Hover over a code block and you will notice a GitHub-inspired copy button! You can modify `./components/Pre.js` to further customise it.
+The component is passed to `MDXComponents` and modifies all `<pre>` blocks.
+
+## Line highlighting and line numbers
+
+Line highlighting and line numbers are now supported out of the box thanks to the new [rehype-prism-plus plugin](https://github.com/timlrx/rehype-prism-plus)
+
+The following javascript code block:
+
+````
+```js {1, 3-4} showLineNumbers
+var num1, num2, sum
+num1 = prompt('Enter first number')
+num2 = prompt('Enter second number')
+sum = parseInt(num1) + parseInt(num2) // "+" means "add"
+alert('Sum = ' + sum) // "+" means combine into a string
+```
+````
+
+will appear as:
+
+```js {1,3-4} showLineNumbers
+var num1, num2, sum;
+num1 = prompt("Enter first number");
+num2 = prompt("Enter second number");
+sum = parseInt(num1) + parseInt(num2); // "+" means "add"
+alert("Sum = " + sum); // "+" means combine into a string
+```
+
+To modify the styles, change the following class selectors in the `prism.css` file:
+
+```css
+.code-highlight {
+  @apply float-left min-w-full;
+}
+
+.code-line {
+  @apply -mx-4 block border-l-4 border-opacity-0 pl-4 pr-4;
+}
+
+.code-line.inserted {
+  @apply bg-green-500 bg-opacity-20;
+}
+
+.code-line.deleted {
+  @apply bg-red-500 bg-opacity-20;
+}
+
+.highlight-line {
+  @apply -mx-4 border-l-4 border-primary-500 bg-gray-700 bg-opacity-50;
+}
+
+.line-number::before {
+  @apply -ml-2 mr-4 inline-block w-4 text-right text-gray-400;
+  content: attr(line);
+}
+```
+
+## Bibliography and Citations (v1.2.1)
+
+`rehype-citation` plugin is added to the xdm processing pipeline in v1.2.1. This allows you to easily format citations and insert bibliography from an existing bibtex or CSL-json file.
+
+For example, the following markdown code sample:
+
+```md
+Standard citation [@Nash1950]
+In-text citations e.g. @Nash1951
+Multiple citations [see @Nash1950; @Nash1951, page 50]
+
+**References:**
+
+[^ref]
+```
+
+is rendered to the following:
+
+Standard citation [@Nash1950]  
+In-text citations e.g. @Nash1951  
+Multiple citations [see @Nash1950; @Nash1951, page 50]
+
+**References:**
+
+[^ref]
+
+A bibliography will be inserted at the end of the document, but this can be overwritten by specifying a `[^Ref]` tag at the intended location.
+The plugin uses APA citation formation, but also supports the following CSLs, 'apa', 'vancouver', 'harvard1', 'chicago', 'mla', or a path to a user-specified CSL file.
+
+See [rehype-citation readme](https://github.com/timlrx/rehype-citation) for more information on the configuration options.

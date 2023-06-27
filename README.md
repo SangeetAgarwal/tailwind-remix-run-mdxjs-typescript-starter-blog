@@ -21,6 +21,7 @@ This is a [Remix-run](https://remix.run/), [Tailwind CSS](https://tailwindcss.co
 - **Server-side syntax highlighting with line numbers and line highlighting via** [rehype-prism-plus](https://github.com/timlrx/rehype-prism-plus)
 - **Citation and bibliography support via** [rehype-citation](https://github.com/timlrx/rehype-citation)
 - **Auto adds `id`s to headings using** [rehype-slug](https://github.com/rehypejs/rehype-slug)
+- **Support for tags - each unique tag will be its own page**
 
 ## Credits and Inspiration
 

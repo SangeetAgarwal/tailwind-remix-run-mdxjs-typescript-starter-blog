@@ -6,6 +6,8 @@ import { getFileBySlug } from "~/lib/mdx.server";
 import { useLoaderData } from "@remix-run/react";
 import { getSeo, getSeoMeta, getSeoLinks } from "~/seo";
 
+const DEFAULT_LAYOUT = "PostSimple";
+
 export let meta = (context: any) => {
   let seoMeta = getSeoMeta({
     title: context.data.extendedFrontMatter.title,
@@ -36,7 +38,7 @@ export default function Blog() {
         <div>
           <MDXLayoutRenderer
             mdxSource={post.mdxSource}
-            layout={"PostSimple"}
+            layout={post.extendedFrontMatter.layout || DEFAULT_LAYOUT}
             extendedFrontMatter={post.extendedFrontMatter}
             toc={post.toc}
           />
