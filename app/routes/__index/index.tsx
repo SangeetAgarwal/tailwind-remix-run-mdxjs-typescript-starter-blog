@@ -1,18 +1,12 @@
-import type {
-  AppData,
-  LoaderFunction,
-  MetaFunction,
-} from "@remix-run/server-runtime";
+import type { LoaderFunction } from "@remix-run/server-runtime";
 import { Link, useLoaderData } from "@remix-run/react";
 import type { Key } from "react";
-import NewsletterForm from "~/components/NewsletterForm";
-import type { Params } from "@remix-run/react";
 import Tag from "~/components/Tag";
 import formatDate from "~/lib/utils/formatDate";
 import { getAllFilesFrontMatter } from "~/lib/mdx.server";
 import { siteMetadata } from "~/utils/siteMetadata";
-import { getSeo, getSeoMeta } from "~/seo";
-import { AllFrontMatter } from "~/lib/types";
+import { getSeoMeta } from "~/seo";
+import type { AllFrontMatter } from "~/lib/types";
 
 export let meta = (context: any) => {
   let seoMeta = getSeoMeta({

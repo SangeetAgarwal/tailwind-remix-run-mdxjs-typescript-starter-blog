@@ -1,4 +1,4 @@
-import { IReadTimeResults } from "reading-time";
+import type { IReadTimeResults } from "reading-time";
 
 export type Toc = { value: string; url: string; depth: number };
 

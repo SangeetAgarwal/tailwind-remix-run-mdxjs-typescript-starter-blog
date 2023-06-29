@@ -5,7 +5,7 @@ import matter from "gray-matter";
 import path from "path";
 import readingTime from "reading-time";
 import remarkExtractFrontmatter from "./remark-extract-frontmatter";
-import { Toc } from "./types";
+import type { Toc } from "./types";
 
 const root = process.cwd();
 

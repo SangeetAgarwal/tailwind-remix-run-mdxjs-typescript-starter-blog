@@ -1,4 +1,4 @@
-import { AuthorFrontMatter } from "~/lib/types";
+import type { AuthorFrontMatter } from "~/lib/types";
 
 export default function AuthorLayout({
   authorFrontMatter,

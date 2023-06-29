@@ -1,7 +1,7 @@
 import { Link } from "@remix-run/react";
 import PageTitle from "~/components/PageTitle";
 import SectionContainer from "~/components/SectionContainer";
-import { ExtendedFrontMatter, PrevNext } from "~/lib/types";
+import type { ExtendedFrontMatter, PrevNext } from "~/lib/types";
 import formatDate from "~/lib/utils/formatDate";
 
 export default function PostLayout({

@@ -1,5 +1,4 @@
 // app/seo.ts
-import { title } from "process";
 import { initSeo } from "remix-seo";
 export const { getSeo, getSeoMeta, getSeoLinks } = initSeo({
   // Pass any SEO defaults for your site here.

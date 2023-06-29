@@ -4,7 +4,7 @@ import PageTitle from "~/components/PageTitle";
 import type { Params } from "@remix-run/react";
 import { getFileBySlug } from "~/lib/mdx.server";
 import { useLoaderData } from "@remix-run/react";
-import { getSeo, getSeoMeta, getSeoLinks } from "~/seo";
+import { getSeoMeta } from "~/seo";
 
 const DEFAULT_LAYOUT = "PostSimple";
 

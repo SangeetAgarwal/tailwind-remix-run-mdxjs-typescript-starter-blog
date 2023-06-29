@@ -1,7 +1,7 @@
 import { Link } from "@remix-run/react";
 import { useState } from "react";
 import Tag from "~/components/Tag";
-import { ExtendedFrontMatter, FrontMatter, Post } from "~/lib/types";
+import type { ExtendedFrontMatter } from "~/lib/types";
 import formatDate from "~/lib/utils/formatDate";
 
 const ListLayout = ({

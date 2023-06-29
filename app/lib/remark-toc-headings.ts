@@ -1,4 +1,4 @@
-import { Toc } from "./types";
+import type { Toc } from "./types";
 
 export const remarkTocHeadings = async (options: { exportRef: Toc[] }) => {
   const BananaSlug = (await import("github-slugger")).default;

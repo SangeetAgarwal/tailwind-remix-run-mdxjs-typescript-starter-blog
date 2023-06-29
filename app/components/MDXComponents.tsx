@@ -8,7 +8,7 @@ import TOCInline from "./TOCInline";
 import { getMDXComponent } from "mdx-bundler/client";
 import { useMemo } from "react";
 import AuthorLayout from "~/layouts/AuthorLayout";
-import {
+import type {
   AuthorFrontMatter,
   ExtendedFrontMatter,
   PrevNext,

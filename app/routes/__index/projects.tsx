@@ -1,5 +1,6 @@
 import { useLoaderData } from "@remix-run/react";
-import { LoaderFunction, json } from "@remix-run/server-runtime";
+import type { LoaderFunction } from "@remix-run/server-runtime";
+import { json } from "@remix-run/server-runtime";
 import { Card } from "~/components/Card";
 import projectsData from "~/data/projectsData";
 import { getSeoMeta } from "~/seo";

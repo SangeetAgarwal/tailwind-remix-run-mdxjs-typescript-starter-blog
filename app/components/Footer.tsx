@@ -1,6 +1,5 @@
 import Link from "~/components/Link";
-import SocialIcon from "~/components/social-icons";
-import { LoaderFunction } from "@remix-run/server-runtime";
+import type { LoaderFunction } from "@remix-run/server-runtime";
 import { useLoaderData } from "@remix-run/react";
 import { siteMetadata } from "~/utils/siteMetadata";
 

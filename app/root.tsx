@@ -6,13 +6,8 @@ import {
   Scripts,
   ScrollRestoration,
 } from "@remix-run/react";
-import type {
-  LinksFunction,
-  LoaderFunction,
-  MetaFunction,
-} from "@remix-run/node";
+import type { LinksFunction, MetaFunction } from "@remix-run/node";
 
-import { json } from "@remix-run/node";
 import tailwindStylesheetUrl from "./styles/tailwind.css";
 import { getSeo } from "~/seo";
 

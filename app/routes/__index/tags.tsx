@@ -1,10 +1,6 @@
 import { json, type LoaderFunction } from "@remix-run/server-runtime";
-import { MDXLayoutRenderer } from "~/components/MDXComponents";
-import PageTitle from "~/components/PageTitle";
-import type { Params } from "@remix-run/react";
-import { getFileBySlug } from "~/lib/mdx.server";
 import { Link, useLoaderData } from "@remix-run/react";
-import { getSeo, getSeoMeta, getSeoLinks } from "~/seo";
+import { getSeoMeta } from "~/seo";
 import { siteMetadata } from "~/utils/siteMetadata";
 import { getAllTags } from "~/lib/tags.server";
 import kebabCase from "~/lib/utils/kebabCase";

@@ -2,7 +2,7 @@ import { json, type LoaderFunction } from "@remix-run/server-runtime";
 import { MDXLayoutRenderer } from "~/components/MDXComponents";
 import { getFileBySlug } from "~/lib/mdx.server";
 import { useLoaderData } from "@remix-run/react";
-import { getSeo, getSeoMeta, getSeoLinks } from "~/seo";
+import { getSeoMeta } from "~/seo";
 
 export let meta = (context: any) => {
   let seoMeta = getSeoMeta({

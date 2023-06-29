@@ -1,8 +1,8 @@
 import { json, type LoaderFunction } from "@remix-run/server-runtime";
 import { getAllFilesFrontMatter } from "~/lib/mdx.server";
 import { useLoaderData } from "@remix-run/react";
-import { getSeo, getSeoMeta, getSeoLinks } from "~/seo";
-import { ExtendedFrontMatter } from "~/lib/types";
+import { getSeoMeta } from "~/seo";
+import type { ExtendedFrontMatter } from "~/lib/types";
 import ListLayout from "~/layouts/ListLayout";
 import { siteMetadata } from "~/utils/siteMetadata";
 
