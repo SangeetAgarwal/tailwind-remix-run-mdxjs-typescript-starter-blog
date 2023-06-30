@@ -10,9 +10,9 @@ import { useMemo } from "react";
 import AuthorLayout from "~/layouts/AuthorLayout";
 import type {
   AuthorFrontMatter,
-  ExtendedFrontMatter,
+  BlogFrontMatter,
+  MdxLayoutRendererProps,
   PrevNext,
-  Toc,
 } from "~/lib/types";
 
 export const MDXComponents = {
@@ -30,7 +30,7 @@ export const MDXComponents = {
   }: {
     components: MDXContentProps;
     layout: string;
-    extendedFrontMatter: ExtendedFrontMatter;
+    blogFrontMatter: BlogFrontMatter;
     authorFrontMatter: AuthorFrontMatter;
     authorDetails: any;
     next: PrevNext;
@@ -53,20 +53,12 @@ export const MDXComponents = {
   },
 };
 
-// TODO: Pass author details, next and prev from parent component so it is in ...rest
 export const MDXLayoutRenderer = ({
   mdxSource,
   layout,
   ...rest
-}: {
-  mdxSource: string;
-  layout: string;
-  extendedFrontMatter?: ExtendedFrontMatter;
-  toc?: Toc[];
-  authorFrontMatter?: AuthorFrontMatter;
-}) => {
+}: MdxLayoutRendererProps) => {
   const MDXLayout = useMemo(() => getMDXComponent(mdxSource), [mdxSource]);
-  return (
-    <MDXLayout layout={layout} components={MDXComponents as any} {...rest} />
-  );
+  // @ts-ignore
+  return <MDXLayout layout={layout} components={MDXComponents} {...rest} />;
 };

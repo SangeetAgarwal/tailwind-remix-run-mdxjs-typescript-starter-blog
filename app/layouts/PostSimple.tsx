@@ -1,25 +1,23 @@
 import { Link } from "@remix-run/react";
 import PageTitle from "~/components/PageTitle";
 import SectionContainer from "~/components/SectionContainer";
-import type { ExtendedFrontMatter, PrevNext } from "~/lib/types";
+import type { BlogFrontMatter, PrevNext } from "~/lib/types";
 import formatDate from "~/lib/utils/formatDate";
 
-export default function PostLayout({
-  extendedFrontMatter,
+export default function PostSimple({
+  blogFrontMatter,
   authorDetails,
   next,
   prev,
   children,
 }: {
-  extendedFrontMatter: ExtendedFrontMatter;
+  blogFrontMatter: BlogFrontMatter;
   authorDetails: any;
   next: PrevNext;
   prev: PrevNext;
   children: React.ReactNode;
 }): JSX.Element {
-  // console.log("PostLayout", frontMatter);
-  const { date, title } = extendedFrontMatter;
-
+  console.log(blogFrontMatter);
   return (
     <SectionContainer>
       {/* <BlogSEO url={`${siteMetadata.siteUrl}/blog/${frontMatter.slug}`} {...frontMatter} />
@@ -32,12 +30,16 @@ export default function PostLayout({
                 <div>
                   <dt className="sr-only">Published on</dt>
                   <dd className="text-base font-medium leading-6 text-gray-500 dark:text-gray-400">
-                    <time dateTime={date}>{formatDate(date)}</time>
+                    {blogFrontMatter.date && (
+                      <time dateTime={blogFrontMatter.date}>
+                        {formatDate(blogFrontMatter.date)}
+                      </time>
+                    )}
                   </dd>
                 </div>
               </dl>
               <div>
-                <PageTitle>{title}</PageTitle>
+                <PageTitle>{blogFrontMatter.title}</PageTitle>
               </div>
             </div>
           </header>

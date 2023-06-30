@@ -7,7 +7,6 @@ export default function AuthorLayout({
   authorFrontMatter: AuthorFrontMatter;
   children: React.ReactNode;
 }): JSX.Element {
-  // console.log("PostLayout", frontMatter);
   const {
     name,
     avatar,

@@ -10,8 +10,8 @@ const DEFAULT_LAYOUT = "PostSimple";
 
 export let meta = (context: any) => {
   let seoMeta = getSeoMeta({
-    title: context.data.extendedFrontMatter.title,
-    description: context.data.extendedFrontMatter.description,
+    title: context.data.blogFrontMatter.title,
+    description: context.data.blogFrontMatter.description,
   });
   return {
     ...seoMeta,
@@ -34,12 +34,12 @@ export default function Blog() {
   const post = useLoaderData();
   return (
     <>
-      {post.extendedFrontMatter.draft !== true ? (
+      {post.blogFrontMatter.draft !== true ? (
         <div>
           <MDXLayoutRenderer
             mdxSource={post.mdxSource}
-            layout={post.extendedFrontMatter.layout || DEFAULT_LAYOUT}
-            extendedFrontMatter={post.extendedFrontMatter}
+            layout={post.blogFrontMatter.layout || DEFAULT_LAYOUT}
+            blogFrontMatter={post.blogFrontMatter}
             toc={post.toc}
           />
         </div>

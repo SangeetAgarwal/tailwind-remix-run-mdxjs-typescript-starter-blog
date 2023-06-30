@@ -1,12 +1,4 @@
-import type { IReadTimeResults } from "reading-time";
-
-export type Toc = { value: string; url: string; depth: number };
-
-export type AllFrontMatter = FrontMatter & {
-  slug: string;
-  date: string;
-};
-
+import type readingTime from "reading-time";
 export type PrevNext = {
   title: string;
   slug: string;
@@ -15,41 +7,55 @@ export type PrevNext = {
   draft: boolean;
   summary: string;
 };
+export type Toc = { value: string; url: string; depth: number };
+export type MdxPageLayout =
+  | "AuthorLayout"
+  | "ListLayout"
+  | "PostLayout"
+  | "PostSimple";
 
-export type FrontMatter = {
+export interface MdxFrontMatter {
+  layout?: MdxPageLayout;
   title: string;
+  name?: string;
   date: string;
-  lastmod: string;
-  draft: boolean;
+  lastmod?: string;
   tags: string[];
+  draft?: boolean;
   summary: string;
-  images: string[];
-  authors: string[];
-  layout: string;
-  canonicalUrl: string;
-};
+  images?: string[] | string;
+  authors?: string[];
+  slug: string;
+}
 
-export type AuthorFrontMatter = {
-  name: string;
+export type ReadingTime = ReturnType<typeof readingTime>;
+
+export interface BlogFrontMatter extends MdxFrontMatter {
+  readingTime: ReadingTime;
+  fileName: string;
+}
+
+export interface AuthorFrontMatter extends MdxFrontMatter {
   avatar: string;
+  github?: string;
   occupation: string;
   company: string;
   email: string;
   twitter: string;
   linkedin: string;
-  github: string;
-};
+}
 
-export type ExtendedFrontMatter = FrontMatter & {
-  readingTime: IReadTimeResults;
-  slug: string | null;
-  fileName: string;
-};
-
-export type Post = {
+export interface MdxFileData {
   mdxSource: string;
-  toc: Toc[];
-  extendedFrontMatter: ExtendedFrontMatter;
-  layout: string | null;
-  authorFrontMatter: AuthorFrontMatter;
-};
+  frontMatter: BlogFrontMatter;
+  toc: unknown[];
+}
+
+export interface MdxLayoutRendererProps {
+  mdxSource: string;
+  layout: string;
+  blogFrontMatter?: BlogFrontMatter;
+  toc?: Toc[];
+  authorFrontMatter?: AuthorFrontMatter;
+  [key: string]: any;
+}

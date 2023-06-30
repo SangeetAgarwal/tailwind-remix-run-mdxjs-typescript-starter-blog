@@ -2,9 +2,9 @@ import { json, type LoaderFunction } from "@remix-run/server-runtime";
 import { getAllFilesFrontMatter } from "~/lib/mdx.server";
 import { useLoaderData } from "@remix-run/react";
 import { getSeoMeta } from "~/seo";
-import type { ExtendedFrontMatter } from "~/lib/types";
 import ListLayout from "~/layouts/ListLayout";
 import { siteMetadata } from "~/utils/siteMetadata";
+import type { BlogFrontMatter } from "~/lib/types";
 
 export let meta = (context: any) => {
   console.log(context.params);
@@ -18,14 +18,12 @@ export let meta = (context: any) => {
 };
 
 export const loader: LoaderFunction = async () => {
-  const allFrontMatters = (await getAllFilesFrontMatter(
-    "blog"
-  )) as unknown as ExtendedFrontMatter[];
+  const allFrontMatters = await getAllFilesFrontMatter("blog");
   return json(allFrontMatters);
 };
 
 export default function Blog() {
-  const allFrontMatters = useLoaderData() as unknown as ExtendedFrontMatter[];
+  const allFrontMatters = useLoaderData() as BlogFrontMatter[];
   return (
     <>
       <ListLayout frontMatters={allFrontMatters} title={"All Posts"} />

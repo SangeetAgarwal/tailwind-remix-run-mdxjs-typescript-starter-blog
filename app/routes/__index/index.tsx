@@ -6,7 +6,7 @@ import formatDate from "~/lib/utils/formatDate";
 import { getAllFilesFrontMatter } from "~/lib/mdx.server";
 import { siteMetadata } from "~/utils/siteMetadata";
 import { getSeoMeta } from "~/seo";
-import type { AllFrontMatter } from "~/lib/types";
+import type { BlogFrontMatter } from "~/lib/types";
 
 export let meta = (context: any) => {
   let seoMeta = getSeoMeta({
@@ -41,7 +41,7 @@ export default function Index() {
         </div>
         <ul className="divide-y divide-gray-200 dark:divide-gray-700">
           {!posts.length && "No posts found."}
-          {posts.slice(0, MAX_DISPLAY).map((frontMatter: AllFrontMatter) => {
+          {posts.slice(0, MAX_DISPLAY).map((frontMatter: BlogFrontMatter) => {
             const { slug, date, title, summary, tags } = frontMatter;
             return (
               <li key={slug} className="py-12">

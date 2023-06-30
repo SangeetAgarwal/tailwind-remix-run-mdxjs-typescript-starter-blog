@@ -1,7 +1,7 @@
 import { Link } from "@remix-run/react";
 import { useState } from "react";
 import Tag from "~/components/Tag";
-import type { ExtendedFrontMatter } from "~/lib/types";
+import type { BlogFrontMatter } from "~/lib/types";
 import formatDate from "~/lib/utils/formatDate";
 
 const ListLayout = ({
@@ -9,12 +9,12 @@ const ListLayout = ({
   title,
   initialFrontMatter = [],
 }: {
-  frontMatters: ExtendedFrontMatter[];
+  frontMatters: BlogFrontMatter[];
   title?: string;
-  initialFrontMatter?: ExtendedFrontMatter[];
+  initialFrontMatter?: BlogFrontMatter[];
 }) => {
   const [searchValue, setSearchValue] = useState("");
-  const filtered = frontMatters.filter((frontMatter: ExtendedFrontMatter) => {
+  const filtered = frontMatters.filter((frontMatter: BlogFrontMatter) => {
     const searchContent =
       frontMatter.title + frontMatter.summary + frontMatter.tags.join(" ");
     return searchContent.toLowerCase().includes(searchValue.toLowerCase());

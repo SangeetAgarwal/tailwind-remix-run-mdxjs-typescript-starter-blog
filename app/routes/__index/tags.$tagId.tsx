@@ -3,13 +3,11 @@ import type { Params } from "@remix-run/react";
 import { getAllFilesFrontMatter } from "~/lib/mdx.server";
 import { useLoaderData } from "@remix-run/react";
 import { getSeoMeta } from "~/seo";
-import type { AllFrontMatter } from "~/lib/types";
 import kebabCase from "~/lib/utils/kebabCase";
 import ListLayout from "~/layouts/ListLayout";
 import { siteMetadata } from "~/utils/siteMetadata";
 
 export let meta = (context: any) => {
-  console.log(context.params);
   let seoMeta = getSeoMeta({
     title: `${context.params.tagId} - ${siteMetadata.author}`,
     description: `${context.params.tagId} tags - ${siteMetadata.author}`,
@@ -26,9 +24,7 @@ export const loader: LoaderFunction = async ({
 }) => {
   const id = params.tagId;
   if (id) {
-    const allFrontMatters = (await getAllFilesFrontMatter(
-      "blog"
-    )) as unknown as AllFrontMatter[];
+    const allFrontMatters = await getAllFilesFrontMatter("blog");
     const filteredFrontMatters = allFrontMatters.filter(
       (post) =>
         post.draft !== true &&

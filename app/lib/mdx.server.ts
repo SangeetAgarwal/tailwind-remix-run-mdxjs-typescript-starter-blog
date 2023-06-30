@@ -5,7 +5,7 @@ import matter from "gray-matter";
 import path from "path";
 import readingTime from "reading-time";
 import remarkExtractFrontmatter from "./remark-extract-frontmatter";
-import type { Toc } from "./types";
+import type { BlogFrontMatter, Toc } from "./types";
 
 const root = process.cwd();
 
@@ -23,7 +23,7 @@ export async function getAllFilesFrontMatter(folder: string) {
 
   const files = getAllFilesRecursively(prefixPaths);
 
-  const allFrontMatter: { slug: string; date: string | null }[] = [];
+  let allFrontMatter: BlogFrontMatter[] = [];
 
   files.forEach((file: string) => {
     // Replace is needed to work on Windows
@@ -33,15 +33,10 @@ export async function getAllFilesFrontMatter(folder: string) {
       return;
     }
     const source = fs.readFileSync(file, "utf8");
-    const { data: frontmatter } = matter(source);
-    if (frontmatter.draft !== true) {
-      allFrontMatter.push({
-        ...frontmatter,
-        slug: formatSlug(fileName),
-        date: frontmatter.date
-          ? new Date(frontmatter.date).toISOString()
-          : null,
-      });
+    let grayMatterData = matter(source);
+    let data = grayMatterData.data as BlogFrontMatter;
+    if (data.draft !== true) {
+      allFrontMatter.push({ ...data, slug: formatSlug(fileName) });
     }
   });
 
@@ -224,7 +219,7 @@ export async function getFileBySlug(type: string, slug: string) {
   return {
     mdxSource: code,
     toc,
-    extendedFrontMatter: {
+    blogFrontMatter: {
       readingTime: readingTime(code),
       slug: slug || null,
       fileName: fs.existsSync(mdxPath) ? `${slug}.mdx` : `${slug}.md`,
