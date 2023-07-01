@@ -4,7 +4,7 @@ This is a [Remix-run](https://remix.run/), [Tailwind CSS](https://tailwindcss.co
 
 ## Examples
 
-- [Demo Blog](https://tailwind-remix-run-mdxjs-typescript-starter-blog.fly.dev/) - this repository that is run on [fly.io](https://fly.io/)
+- [Demo Blog](https://tailwind-remix-run-mdxjs-typescript-starter-blog.fly.dev/) - this repository is deployed to [fly.io](https://fly.io/)
 - [My personal blog](https://www.makebitbyte.com/)
 
 ## Features
