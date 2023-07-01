@@ -5,7 +5,12 @@ import matter from "gray-matter";
 import path from "path";
 import readingTime from "reading-time";
 import remarkExtractFrontmatter from "./remark-extract-frontmatter";
-import type { BlogFrontMatter, Toc } from "./types";
+import type { BlogFrontMatter, Toc } from "~/types/mdx";
+import type {
+  RemarkTocHeadingOptions,
+  UnistNodeType,
+  UnistTreeType,
+} from "~/types/server";
 
 const root = process.cwd();
 
@@ -75,9 +80,9 @@ export async function getFileBySlug(type: string, slug: string) {
   const remarkMath = (await import("remark-math")).default;
 
   const remarkCodeTitles = () => {
-    return (tree: any) =>
-      visit(tree, "code", (node: any, index: any, parent: any) => {
-        const nodeLang = node.lang || "";
+    return (tree: UnistTreeType) => {
+      return visit(tree, "code", (node: UnistNodeType, index) => {
+        let nodeLang = node.lang || "";
         let language = "";
         let title = "";
 
@@ -85,14 +90,10 @@ export async function getFileBySlug(type: string, slug: string) {
           language = nodeLang.slice(0, nodeLang.search(":"));
           title = nodeLang.slice(nodeLang.search(":") + 1, nodeLang.length);
         }
+        if (!title) return;
 
-        if (!title) {
-          return;
-        }
-
-        const className = "remark-code-title";
-
-        const titleNode = {
+        let className = "remark-code-title";
+        let titleNode = {
           type: "mdxJsxFlowElement",
           name: "div",
           attributes: [
@@ -102,21 +103,27 @@ export async function getFileBySlug(type: string, slug: string) {
           data: { _xdmExplicitJsx: true },
         };
 
-        parent.children.splice(index, 0, titleNode);
+        tree.children.splice(index, 0, titleNode);
+        // @ts-ignore
         node.lang = language;
       });
+    };
   };
 
-  const remarkTocHeadings = (options: { exportRef: Toc[] }) => {
-    return (tree: any) => {
-      return visit(tree, "heading", (node: any, index: any, parent: any) => {
-        const textContent = toString(node);
-        options.exportRef.push({
-          value: textContent,
-          url: "#" + BananaSlug.slug(textContent),
-          depth: node.depth,
-        });
-      });
+  const remarkTocHeadings = (options: RemarkTocHeadingOptions) => {
+    return (tree: UnistNodeType) => {
+      return visit(
+        tree,
+        "heading",
+        (node: UnistNodeType, index: any, parent: any) => {
+          const textContent = toString(node);
+          options.exportRef.push({
+            value: textContent,
+            url: "#" + BananaSlug.slug(textContent),
+            depth: node.depth!,
+          });
+        }
+      );
     };
   };
 
@@ -144,7 +151,7 @@ export async function getFileBySlug(type: string, slug: string) {
     );
   }
 
-  let toc: Toc[] = [{ value: "", url: "", depth: 0 }];
+  let toc: Toc[] = [];
 
   const { code, frontmatter } = await bundleMDX({
     source,
@@ -153,7 +160,7 @@ export async function getFileBySlug(type: string, slug: string) {
     // will be imported from the components directory
     cwd: path.join(root, "app", "components"),
 
-    mdxOptions(options, frontmatter): any {
+    mdxOptions(options, frontmatter) {
       // this is the recommended way to add custom remark/rehype plugins:
       // The syntax might look weird, but it protects you in case we add/remove
       // plugins in the future.
@@ -219,7 +226,7 @@ export async function getFileBySlug(type: string, slug: string) {
   return {
     mdxSource: code,
     toc,
-    blogFrontMatter: {
+    frontMatter: {
       readingTime: readingTime(code),
       slug: slug || null,
       fileName: fs.existsSync(mdxPath) ? `${slug}.mdx` : `${slug}.md`,

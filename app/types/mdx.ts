@@ -8,11 +8,7 @@ export type PrevNext = {
   summary: string;
 };
 export type Toc = { value: string; url: string; depth: number };
-export type MdxPageLayout =
-  | "AuthorLayout"
-  | "ListLayout"
-  | "PostLayout"
-  | "PostSimple";
+export type MdxPageLayout = "AuthorLayout" | "ListLayout" | "PostSimpleLayout";
 
 export interface MdxFrontMatter {
   layout?: MdxPageLayout;
@@ -54,8 +50,8 @@ export interface MdxFileData {
 export interface MdxLayoutRendererProps {
   mdxSource: string;
   layout: string;
-  blogFrontMatter?: BlogFrontMatter;
+  frontMatter?: MdxFrontMatter;
   toc?: Toc[];
-  authorFrontMatter?: AuthorFrontMatter;
   [key: string]: any;
+  authorFrontMatter?: MdxFrontMatter;
 }

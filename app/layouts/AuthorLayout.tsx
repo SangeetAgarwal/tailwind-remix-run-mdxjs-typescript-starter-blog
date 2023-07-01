@@ -1,12 +1,9 @@
-import type { AuthorFrontMatter } from "~/lib/types";
+import type { AuthorLayoutProps } from "~/types/layout";
 
 export default function AuthorLayout({
   authorFrontMatter,
   children,
-}: {
-  authorFrontMatter: AuthorFrontMatter;
-  children: React.ReactNode;
-}): JSX.Element {
+}: AuthorLayoutProps): JSX.Element {
   const {
     name,
     avatar,

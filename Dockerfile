@@ -51,6 +51,7 @@ COPY --from=build /myapp/start.sh /myapp/start.sh
 COPY --from=build /myapp/app/data /myapp/app/data
 COPY --from=build /myapp/app/components /myapp/app/components
 COPY --from=build /myapp/app/layouts /myapp/app/layouts
+COPY --from=build /myapp/app/types /myapp/app/types
 COPY --from=build /myapp/app/lib /myapp/app/lib
 
 ENTRYPOINT [ "./start.sh" ]

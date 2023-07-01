@@ -6,7 +6,7 @@ import formatDate from "~/lib/utils/formatDate";
 import { getAllFilesFrontMatter } from "~/lib/mdx.server";
 import { siteMetadata } from "~/utils/siteMetadata";
 import { getSeoMeta } from "~/seo";
-import type { BlogFrontMatter } from "~/lib/types";
+import type { BlogFrontMatter } from "~/types/mdx";
 
 export let meta = (context: any) => {
   let seoMeta = getSeoMeta({

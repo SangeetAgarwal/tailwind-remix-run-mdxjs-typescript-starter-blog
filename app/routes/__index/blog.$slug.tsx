@@ -5,13 +5,16 @@ import type { Params } from "@remix-run/react";
 import { getFileBySlug } from "~/lib/mdx.server";
 import { useLoaderData } from "@remix-run/react";
 import { getSeoMeta } from "~/seo";
+import formatDate from "~/lib/utils/formatDate";
 
-const DEFAULT_LAYOUT = "PostSimple";
+const DEFAULT_LAYOUT = "PostSimpleLayout";
 
-export let meta = (context: any) => {
+export let meta = (context: {
+  data: { frontMatter: { title: any; description: any } };
+}) => {
   let seoMeta = getSeoMeta({
-    title: context.data.blogFrontMatter.title,
-    description: context.data.blogFrontMatter.description,
+    title: context.data.frontMatter.title,
+    description: context.data.frontMatter.description,
   });
   return {
     ...seoMeta,
@@ -23,9 +26,10 @@ export const loader: LoaderFunction = async ({
 }: {
   params: Params;
 }) => {
-  const id = params.blogId;
-  if (id) {
-    const post = await getFileBySlug("blog", id);
+  const slug = params.slug;
+  if (slug) {
+    const post = await getFileBySlug("blog", slug);
+    post.frontMatter.date = formatDate(post.frontMatter.date!);
     return json(post);
   }
 };
@@ -34,12 +38,12 @@ export default function Blog() {
   const post = useLoaderData();
   return (
     <>
-      {post.blogFrontMatter.draft !== true ? (
+      {post.frontMatter.draft !== true ? (
         <div>
           <MDXLayoutRenderer
             mdxSource={post.mdxSource}
-            layout={post.blogFrontMatter.layout || DEFAULT_LAYOUT}
-            blogFrontMatter={post.blogFrontMatter}
+            layout={post.frontMatter.layout || DEFAULT_LAYOUT}
+            frontMatter={post.frontMatter}
             toc={post.toc}
           />
         </div>

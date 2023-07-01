@@ -1,19 +1,18 @@
-import { BlogNewsletterForm } from "./NewsletterForm";
-import CustomLink from "./Link";
-import Image from "./Image";
 import type { MDXContentProps } from "mdx-bundler/client";
-import PostSimple from "~/layouts/PostSimple";
-import Pre from "./Pre";
-import TOCInline from "./TOCInline";
 import { getMDXComponent } from "mdx-bundler/client";
 import { useMemo } from "react";
 import AuthorLayout from "~/layouts/AuthorLayout";
+import PostSimpleLayout from "~/layouts/PostSimpleLayout";
 import type {
   AuthorFrontMatter,
   BlogFrontMatter,
   MdxLayoutRendererProps,
-  PrevNext,
-} from "~/lib/types";
+} from "~/types/mdx";
+import Image from "./Image";
+import CustomLink from "./Link";
+import { BlogNewsletterForm } from "./NewsletterForm";
+import Pre from "./Pre";
+import TOCInline from "./TOCInline";
 
 export const MDXComponents = {
   Image,
@@ -24,31 +23,23 @@ export const MDXComponents = {
   wrapper: ({
     components,
     layout,
-    authorFrontMatter,
     children,
     ...rest
   }: {
     components: MDXContentProps;
     layout: string;
-    blogFrontMatter: BlogFrontMatter;
-    authorFrontMatter: AuthorFrontMatter;
-    authorDetails: any;
-    next: PrevNext;
-    prev: PrevNext;
     children: React.ReactNode;
+    frontMatter: BlogFrontMatter;
+    authorFrontMatter: AuthorFrontMatter;
+    authorDetails: AuthorFrontMatter[];
   }) => {
-    // const Layout = require(`~/layouts/${layout}`).default
-    // return <Layout {...rest} />
+    // const Layout = (await import(`~/app/layouts/${layout}`)) as any;
+    // return <Layout {...rest} />;
     switch (layout) {
-      case "PostSimple":
-        return <PostSimple children={children} {...rest} />;
+      case "PostSimpleLayout":
+        return <PostSimpleLayout children={children} {...rest} />;
       case "AuthorLayout":
-        return (
-          <AuthorLayout
-            children={children}
-            authorFrontMatter={authorFrontMatter}
-          />
-        );
+        return <AuthorLayout children={children} {...rest} />;
     }
   },
 };

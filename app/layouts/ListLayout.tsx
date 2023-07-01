@@ -1,28 +1,25 @@
 import { Link } from "@remix-run/react";
 import { useState } from "react";
 import Tag from "~/components/Tag";
-import type { BlogFrontMatter } from "~/lib/types";
+import type { BlogFrontMatter } from "~/types/mdx";
 import formatDate from "~/lib/utils/formatDate";
+import type { ListLayoutProps } from "~/types/layout";
 
 const ListLayout = ({
-  frontMatters,
+  posts,
   title,
-  initialFrontMatter = [],
-}: {
-  frontMatters: BlogFrontMatter[];
-  title?: string;
-  initialFrontMatter?: BlogFrontMatter[];
-}) => {
+  initialDisplayPosts = [],
+}: ListLayoutProps) => {
   const [searchValue, setSearchValue] = useState("");
-  const filtered = frontMatters.filter((frontMatter: BlogFrontMatter) => {
+  const filtered = posts.filter((frontMatter: BlogFrontMatter) => {
     const searchContent =
       frontMatter.title + frontMatter.summary + frontMatter.tags.join(" ");
     return searchContent.toLowerCase().includes(searchValue.toLowerCase());
   });
   // If initialDisplayPosts exist, display it if no searchValue is specified
   const display =
-    initialFrontMatter.length > 0 && !searchValue
-      ? initialFrontMatter
+    initialDisplayPosts.length > 0 && !searchValue
+      ? initialDisplayPosts
       : filtered;
 
   return (
