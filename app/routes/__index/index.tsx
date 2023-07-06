@@ -19,6 +19,9 @@ export let meta = (context: any) => {
 
 export const loader: LoaderFunction = async () => {
   const posts = await getAllFilesFrontMatter("blog");
+  posts.forEach((post) => {
+    return (post.date = formatDate(post.date));
+  });
   return { posts, siteMetadata };
 };
 const MAX_DISPLAY = 10;
@@ -102,11 +105,6 @@ export default function Index() {
           </Link>
         </div>
       )}
-      {/* {siteMetadata?.newsletter?.provider != null && (
-        <div className="flex items-center justify-center pt-4">
-          <NewsletterForm />
-        </div>
-      )} */}
     </>
   );
 }
