@@ -42,10 +42,10 @@ export default function Index() {
           <MobileNav />
         </div>
       </header>
-      <Outlet />
-      <div className="mt-10 flex flex-col items-center">
-        <Footer />
-      </div>
+      <main>
+        <Outlet />
+      </main>
+      <Footer />
     </SectionContainer>
   );
 }

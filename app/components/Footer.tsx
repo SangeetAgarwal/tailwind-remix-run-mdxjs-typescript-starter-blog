@@ -9,7 +9,7 @@ export const loader: LoaderFunction = async () => {
 export default function Footer() {
   const { siteMetadata } = useLoaderData();
   return (
-    <footer>
+    <footer className="mt-10 flex flex-col items-center">
       <div className="mt-16 flex flex-col items-center">
         <div className="mb-3 flex space-x-4">
           <a
