@@ -5,7 +5,6 @@ import { getSeoMeta } from "~/seo";
 import ListLayout from "~/layouts/ListLayout";
 import { siteMetadata } from "~/utils/siteMetadata";
 import formatDate from "~/lib/utils/formatDate";
-import type { BlogFrontMatter } from "~/types/mdx";
 
 export let meta = (context: any) => {
   let seoMeta = getSeoMeta({
@@ -26,7 +25,7 @@ export const loader: LoaderFunction = async () => {
 };
 
 export default function Blog() {
-  const allFrontMatters = useLoaderData() as BlogFrontMatter[];
+  const allFrontMatters = useLoaderData();
   return (
     <>
       <ListLayout posts={allFrontMatters} title={"All Posts"} />

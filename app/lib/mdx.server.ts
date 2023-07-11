@@ -160,7 +160,7 @@ export async function getFileBySlug(type: string, slug: string) {
     // will be imported from the components directory
     cwd: path.join(root, "app", "components"),
 
-    mdxOptions(options, frontmatter) {
+    xdmOptions(options, frontmatter) {
       // this is the recommended way to add custom remark/rehype plugins:
       // The syntax might look weird, but it protects you in case we add/remove
       // plugins in the future.

@@ -1,12 +1,9 @@
-/** @type {import('tailwindcss').Config} */
-const defaultTheme = require("tailwindcss/defaultTheme");
-const colors = require("tailwindcss/colors");
-
-module.exports = {
-  experimental: {
-    optimizeUniversalDefaults: false,
-  },
-
+import type { Config } from "tailwindcss";
+import defaultTheme from "tailwindcss/defaultTheme.js";
+import colors from "tailwindcss/colors.js";
+import fomrsPlugin from "@tailwindcss/forms";
+import typographyPlugin from "@tailwindcss/typography";
+export default {
   content: ["./app/**/*.{ts,tsx,jsx,js}"],
   darkMode: "class",
   theme: {
@@ -27,7 +24,7 @@ module.exports = {
         primary: colors.teal,
         gray: colors.neutral,
       },
-      typography: (theme) => ({
+      typography: (theme: (arg0: string) => any) => ({
         DEFAULT: {
           css: {
             color: theme("colors.gray.700"),
@@ -160,5 +157,5 @@ module.exports = {
       }),
     },
   },
-  plugins: [require("@tailwindcss/forms"), require("@tailwindcss/typography")],
-};
+  plugins: [typographyPlugin, fomrsPlugin],
+} satisfies Config;

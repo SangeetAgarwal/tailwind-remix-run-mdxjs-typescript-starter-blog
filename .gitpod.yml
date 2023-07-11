@@ -37,8 +37,16 @@ tasks:
         fi
       fi
 
+  - name: Docker
+    init: docker-compose pull
+    command: docker-compose up
+
   - init: npm install
-    command: npm run setup && npm run dev
+    command: |
+      gp await-port 5432
+      npm run setup
+      npm run build
+      npm run dev
 
 vscode:
   extensions:

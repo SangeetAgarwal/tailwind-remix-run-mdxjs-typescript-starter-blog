@@ -1,7 +1,7 @@
 ---
 title: "Features in v1"
-date: "2023-06-13"
-lastmod: "2023-06-13"
+date: "2023-06-30"
+lastmod: "2023-06-30"
 tags: ["Remix-run", "tailwind", "guide"]
 draft: false
 summary: "An overview of the features released in v1 - code block copy, frontmatter layout and more"
@@ -118,7 +118,7 @@ date: '2021-05-26   '
 tags: ['remix-run', 'tailwind', 'guide']
 draft: false
 summary: 'Introducing the new layout features - you can map mdx blog content to layout components by configuring the frontmatter field'
-layout: PostSimple
+layout: PostSimpleLayout
 ---
 ```
 
@@ -135,8 +135,8 @@ I have struggled with adding dynamic `require` in Remix so this will have to do 
 
 ```jsx
 switch (layout) {
-  case "PostSimple":
-    return <PostSimple children={children} {...rest} />;
+  case "PostSimpleLayout":
+    return <PostSimpleLayout children={children} {...rest} />;
   case "AuthorLayout":
     return (
       <AuthorLayout children={children} authorFrontMatter={authorFrontMatter} />
