@@ -7,7 +7,7 @@ Easily the most feature rich Remix-run markdown blogging template in existence. 
 
 ## Examples
 
-- [Demo Blog](https://tailwind-remix-run-blues-starter-blog.fly.dev/) - this repository is deployed to [fly.io](https://fly.io/)
+- [Demo Blog](https://tailwind-remix-run-mdxjs-typescript-starter-blog.fly.dev/) - this repository is deployed to [fly.io](https://fly.io/)
 - [My personal blog](https://www.makebitbyte.com/)
 
 ## Features
@@ -36,4 +36,4 @@ If you found this project helpful, let the community know by giving it a [star](
 
 ## Licence
 
-[MIT](https://github.com/SangeetAgarwal/bitoflearning/blob/main/LICENSE) © [Sangeet Agarwal](https://www.makebitbyte.com/)
+[MIT](https://github.com/SangeetAgarwal/tailwind-remix-run-mdxjs-typescript-starter-blog/blob/main/LICENSE) © [Sangeet Agarwal](https://www.makebitbyte.com/)
