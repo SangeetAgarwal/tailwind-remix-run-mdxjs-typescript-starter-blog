@@ -123,7 +123,7 @@ layout: PostSimpleLayout
 ```
 
 You can configure the default layout in the respective page section by modifying the `DEFAULT_LAYOUT` variable.
-The `DEFAULT_LAYOUT` for blog posts page is set to `PostSimple`.
+The `DEFAULT_LAYOUT` for blog posts page is set to `PostSimpleLayout`.
 
 ### Extend
 
@@ -131,19 +131,22 @@ The `DEFAULT_LAYOUT` for blog posts page is set to `PostSimple`.
 
 I do have a rather ugly switch statment in the `MDXComponents.tsx` so each time you add a new layout template you must add it to the switch statment.
 
-I have struggled with adding dynamic `require` in Remix so this will have to do for now.
-
 ```jsx
 switch (layout) {
   case "PostSimpleLayout":
     return <PostSimpleLayout children={children} {...rest} />;
   case "AuthorLayout":
-    return (
-      <AuthorLayout children={children} authorFrontMatter={authorFrontMatter} />
-    );
+    return <AuthorLayout children={children} {...rest} />;
   case "ExampleLayout":
     return <ExampleLayout children={children} {...rest} />;
 }
+```
+
+I have struggled with adding dynamic `require` in Remix as shown below so for now the `switch` statement above is all I have.
+
+```jsx
+const Layout = (await import(`~/app/layouts/${layout}`)) as any;
+return <Layout {...rest} />;
 ```
 
 Use the `MDXLayoutRenderer` component on a page where you want to accept a layout name to map to the desired layout. You need to pass the layout name from the layout folder (it has to be an exact match).

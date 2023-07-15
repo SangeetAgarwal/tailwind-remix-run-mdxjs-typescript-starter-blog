@@ -10,7 +10,7 @@ import formatDate from "~/lib/utils/formatDate";
 
 export let meta = (context: any) => {
   let seoMeta = getSeoMeta({
-    title: `${context.params.tagId} - ${siteMetadata.author}`,
+    title: `${context.params.tag} - ${siteMetadata.author}`,
     description: `${context.params.tagId} tags - ${siteMetadata.author}`,
   });
   return {
