@@ -10,9 +10,11 @@ import {
 } from "@remix-run/react";
 
 import stylesheet from "~/tailwind.css";
+import prismStyles from "~/prism.css";
 
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: stylesheet },
+  { rel: "stylesheet", href: prismStyles },
   ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
   {
     rel: "android-chrome-96x96",
