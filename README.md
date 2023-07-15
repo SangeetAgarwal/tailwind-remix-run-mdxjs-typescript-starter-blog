@@ -12,8 +12,8 @@ Easily the most feature rich Remix-run markdown blogging template in existence. 
 
 ## Features
 
-- **Easy styling customization with** [Tailwind 2.0](https://blog.tailwindcss.com/tailwindcss-v2)
-- **Near perfect lighthouse score** - [Lighthouse report](https://www.webpagetest.org/result/230614_BiDcB4_6X9/)
+- **Easily customize styling with** [Tailwind 3.0](https://tailwindcss.com/blog/tailwindcss-v3)
+- **Near perfect lighthouse score** - [Lighthouse report](https://www.webpagetest.org/result/230715_AiDc9Y_7E5/)
 - **Mobile-friendly view**
 - [MDX](https://mdxjs.com/) **allows you to use JSX in your markdown content**
 - **Math display supported via** [KaTeX](https://katex.org/) **using the** [rehype-katex](https://www.npmjs.com/package/rehype-katex)
@@ -21,10 +21,20 @@ Easily the most feature rich Remix-run markdown blogging template in existence. 
 - **Typescript support**
 - **Citation and bibliography support via** [rehype-citation](https://github.com/timlrx/rehype-citation)
 - **TOC component**
+- **Blog Templates**
 - **Server-side syntax highlighting with line numbers and line highlighting via** [rehype-prism-plus](https://github.com/timlrx/rehype-prism-plus)
-- **Citation and bibliography support via** [rehype-citation](https://github.com/timlrx/rehype-citation)
 - **Auto adds `id`s to headings using** [rehype-slug](https://github.com/rehypejs/rehype-slug)
+- **Easily retrieve data with [mdx-bundler](https://github.com/kentcdodds/mdx-bundler)**
+- **A page to showcase all your projects**
 - **Support for tags - each unique tag will be its own page**
+
+## Sample posts
+
+- **[Synopsis of features in this starter blog app](https://tailwind-remix-run-mdxjs-typescript-starter-blog.fly.dev/blog/features-in-v1)**
+- **[Guide for writing markdown text](https://tailwind-remix-run-mdxjs-typescript-starter-blog.fly.dev/blog/github-markdown-guide)**
+- **[An expose of how to add markdown images in jsx](https://tailwind-remix-run-mdxjs-typescript-starter-blog.fly.dev/blog/pictures-of-canada)**
+- **[An example of representing mathematical notations](https://tailwind-remix-run-mdxjs-typescript-starter-blog.fly.dev/blog/deriving-ols-estimator)**
+- **[See how to present long prose](https://tailwind-remix-run-mdxjs-typescript-starter-blog.fly.dev/blog/the-time-machine)**
 
 ## Credits and Inspiration
 
