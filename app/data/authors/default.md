@@ -9,7 +9,7 @@ linkedin: https://www.linkedin.com
 github: https://github.com
 ---
 
-Heads Watzang is a professor of robotics at the Harvard University.
+Heads Watzang is a professor of robotics at the Standford University.
 
 Aliquip aliqua excepteur occaecat ullamco qui aliquip ad cillum irure non velit dolore occaecat. Minim enim ad duis eu quis ullamco consectetur nulla laborum ex sit esse. Exercitation voluptate non minim dolore qui laboris ex ex. Dolore quis exercitation et esse esse incididunt commodo fugiat cillum ipsum consectetur cupidatat minim.
 
