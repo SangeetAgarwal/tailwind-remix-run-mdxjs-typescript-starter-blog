@@ -9,12 +9,14 @@ import {
   ScrollRestoration,
 } from "@remix-run/react";
 
-import stylesheet from "~/tailwind.css";
+import baseStyles from "~/tailwind.css";
 import prismStyles from "~/prism.css";
+import katexStyles from "katex/dist/katex.css";
 
 export const links: LinksFunction = () => [
-  { rel: "stylesheet", href: stylesheet },
+  { rel: "stylesheet", href: baseStyles },
   { rel: "stylesheet", href: prismStyles },
+  { rel: "stylesheet", href: katexStyles },
   ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
   {
     rel: "android-chrome-96x96",
