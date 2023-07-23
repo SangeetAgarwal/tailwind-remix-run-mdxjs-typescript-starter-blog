@@ -1,5 +1,7 @@
 # Tailwind Remix-run MDX.js Starter Blog
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/SangeetAgarwal/tailwind-remix-run-mdxjs-typescript-starter-blog/blob/main/LICENSE)
+
 This is a [Remix-run](https://remix.run/), [Tailwind CSS](https://tailwindcss.com/), typescript blogging starter template.
 This was made using the [Remix's blues stack](https://github.com/remix-run/blues-stack).
 
