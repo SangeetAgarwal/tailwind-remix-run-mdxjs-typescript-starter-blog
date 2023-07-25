@@ -5,6 +5,7 @@ const siteMetadata = {
   description: "A blog created with Remix-run and Tailwind.css",
   language: "en-us",
   theme: "system", // system, dark or light
+  siteUrl: "https://tailwind-remix-run-mdxjs-typescript-starter-blog.fly.dev",
   email: "address@yoursite.com",
   github: "https://github.com",
   twitter: "https://twitter.com/Twitter",

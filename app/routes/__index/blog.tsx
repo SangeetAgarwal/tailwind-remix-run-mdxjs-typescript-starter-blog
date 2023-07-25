@@ -5,6 +5,13 @@ import { getSeoMeta } from "~/seo";
 import ListLayout from "~/layouts/ListLayout";
 import { siteMetadata } from "~/utils/siteMetadata";
 import formatDate from "~/lib/utils/formatDate";
+import type { SEOHandle } from "@balavishnuvj/remix-seo";
+
+export const handle: SEOHandle = {
+  getSitemapEntries: async (request) => {
+    return [{ route: `/blog`, priority: 0.7 }];
+  },
+};
 
 export let meta = (context: any) => {
   let seoMeta = getSeoMeta({

@@ -2,12 +2,22 @@ import { json, type LoaderFunction } from "@remix-run/server-runtime";
 import { MDXLayoutRenderer } from "~/components/MDXComponents";
 import PageTitle from "~/components/PageTitle";
 import type { Params } from "@remix-run/react";
-import { getFileBySlug } from "~/lib/mdx.server";
+import { getAllFilesFrontMatter, getFileBySlug } from "~/lib/mdx.server";
 import { useLoaderData } from "@remix-run/react";
 import { getSeoMeta } from "~/seo";
 import formatDate from "~/lib/utils/formatDate";
+import type { SEOHandle } from "@balavishnuvj/remix-seo";
 
 const DEFAULT_LAYOUT = "PostSimpleLayout";
+
+export const handle: SEOHandle = {
+  getSitemapEntries: async (request) => {
+    const allFrontMatters = await getAllFilesFrontMatter("blog");
+    return allFrontMatters.map((blog) => {
+      return { route: `/blog/${blog.slug}`, priority: 0.7 };
+    });
+  },
+};
 
 export let meta = (context: {
   data: { frontMatter: { title: any; description: any } };

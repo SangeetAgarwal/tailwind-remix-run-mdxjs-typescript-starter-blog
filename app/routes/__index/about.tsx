@@ -3,6 +3,13 @@ import { MDXLayoutRenderer } from "~/components/MDXComponents";
 import { getFileBySlug } from "~/lib/mdx.server";
 import { useLoaderData } from "@remix-run/react";
 import { getSeoMeta } from "~/seo";
+import type { SEOHandle } from "@balavishnuvj/remix-seo";
+
+export const handle: SEOHandle = {
+  getSitemapEntries: async (request) => {
+    return [{ route: `/about`, priority: 0.7 }];
+  },
+};
 
 export let meta = (context: any) => {
   let seoMeta = getSeoMeta({

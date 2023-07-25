@@ -7,6 +7,17 @@ import kebabCase from "~/lib/utils/kebabCase";
 import ListLayout from "~/layouts/ListLayout";
 import { siteMetadata } from "~/utils/siteMetadata";
 import formatDate from "~/lib/utils/formatDate";
+import type { SEOHandle } from "@balavishnuvj/remix-seo";
+import { getAllTags } from "~/lib/tags.server";
+
+export const handle: SEOHandle = {
+  getSitemapEntries: async (request) => {
+    const tags = await getAllTags("blog");
+    return Object.keys(tags).map((tag) => {
+      return { route: `/tags/${tag}`, priority: 0.7 };
+    });
+  },
+};
 
 export let meta = (context: any) => {
   let seoMeta = getSeoMeta({
