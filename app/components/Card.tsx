@@ -1,4 +1,4 @@
-import { Link } from "@remix-run/react";
+import Link from "./Link";
 
 export const Card = ({
   title,
@@ -19,7 +19,7 @@ export const Card = ({
     >
       {imgSrc &&
         (href ? (
-          <Link to={href} aria-label={`Link to ${title}`}>
+          <Link href={href} aria-label={`Link to ${title}`}>
             <img
               alt={title}
               src={imgSrc}
@@ -40,7 +40,7 @@ export const Card = ({
       <div className="p-6">
         <h2 className="mb-3 text-2xl font-bold leading-8 tracking-tight">
           {href ? (
-            <Link to={href} aria-label={`Link to ${title}`}>
+            <Link href={href} aria-label={`Link to ${title}`}>
               {title}
             </Link>
           ) : (
@@ -52,7 +52,7 @@ export const Card = ({
         </p>
         {href && (
           <Link
-            to={href}
+            href={href}
             className="text-base font-medium leading-6 text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
             aria-label={`Link to ${title}`}
           >

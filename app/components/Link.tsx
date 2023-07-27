@@ -1,39 +1,23 @@
 import { Link } from "@remix-run/react";
+import type { AnchorHTMLAttributes } from "react";
 
-const CustomLink = ({
-  children,
+export default function CustomLink({
   href,
   ...rest
-}: {
-  children: any;
-  href: string;
-}): JSX.Element => {
-  const isInternalLink = href && href.startsWith("/");
-  const isAnchorLink = href && href.startsWith("#");
+}: AnchorHTMLAttributes<HTMLAnchorElement>) {
+  let isInternalLink = href && href.startsWith("/");
+  let isAnchorLink = href && href.startsWith("#");
 
   if (isInternalLink) {
-    return (
-      <Link to={href} {...rest}>
-        {children}
-      </Link>
-    );
+    // eslint-disable-next-line jsx-a11y/anchor-has-content
+    return <Link to={href as string} {...rest} />;
   }
 
   if (isAnchorLink) {
     // eslint-disable-next-line jsx-a11y/anchor-has-content
-    return (
-      <a href={href} {...rest}>
-        {children}
-      </a>
-    );
+    return <a href={href} {...rest} />;
   }
 
   // eslint-disable-next-line jsx-a11y/anchor-has-content
-  return (
-    <a target="_blank" rel="noopener noreferrer" href={href} {...rest}>
-      {children}
-    </a>
-  );
-};
-
-export default CustomLink;
+  return <a target="_blank" rel="noopener noreferrer" href={href} {...rest} />;
+}
