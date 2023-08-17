@@ -14,6 +14,7 @@ import { BlogNewsletterForm } from "./NewsletterForm";
 import Pre from "./Pre";
 import TOCInline from "./TOCInline";
 
+import { LRUCache } from "lru-cache";
 export const MDXComponents = {
   Image,
   TOCInline,
@@ -49,7 +50,22 @@ export const MDXLayoutRenderer = ({
   layout,
   ...rest
 }: MdxLayoutRendererProps) => {
-  const MDXLayout = useMemo(() => getMDXComponent(mdxSource), [mdxSource]);
+  const MDXLayout = useMemo(() => {
+    if (mdxComponentCache.has(mdxSource)) {
+      return mdxComponentCache.get(mdxSource)!;
+    }
+    const component = getMDXComponent(mdxSource);
+    mdxComponentCache.set(mdxSource, component);
+    return component;
+  }, [mdxSource]);
+
   // @ts-ignore
   return <MDXLayout layout={layout} components={MDXComponents} {...rest} />;
 };
+
+const mdxComponentCache = new LRUCache<
+  string,
+  ReturnType<typeof getMDXComponent>
+>({
+  max: 1000,
+});
