@@ -7,7 +7,6 @@ draft: false
 summary: "An overview of the features released in v1 - code block copy, frontmatter layout and more"
 layout: PostSimpleLayout
 bibliography: references-data.bib
-canonicalUrl: https://tailwind-nextjs-starter-blog.vercel.app/blog/features-in-v1/
 ---
 
 ## Overview
@@ -22,7 +21,7 @@ A post on the features in v1.0:
 
 You can easily modify the theme color by changing the primary attribute in the tailwind config file:
 
-```js:tailwind.config.js
+```:tailwind.config.js
 theme: {
     colors: {
       primary: colors.teal,
@@ -171,7 +170,7 @@ Line highlighting and line numbers are now supported out of the box thanks to th
 The following javascript code block:
 
 ````
-```js {1, 3-4} showLineNumbers
+```js:showLineNumbers {1, 3-4}
 var num1, num2, sum
 num1 = prompt('Enter first number')
 num2 = prompt('Enter second number')
@@ -182,7 +181,7 @@ alert('Sum = ' + sum) // "+" means combine into a string
 
 will appear as:
 
-```js {1,3-4} showLineNumbers
+```js:showLineNumbers {1, 3-4}
 var num1, num2, sum;
 num1 = prompt("Enter first number");
 num2 = prompt("Enter second number");

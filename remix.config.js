@@ -12,4 +12,5 @@ module.exports = {
   postcss: true,
   serverModuleFormat: "cjs",
   tailwind: true,
+  // sourcemap: true,
 };

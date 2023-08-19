@@ -133,24 +133,6 @@ export async function getFileBySlug(type: string, slug: string) {
     ? fs.readFileSync(mdxPath, "utf8")
     : fs.readFileSync(mdPath, "utf8");
 
-  // https://github.com/kentcdodds/mdx-bundler#nextjs-esbuild-enoent
-  if (process.platform === "win32") {
-    process.env.ESBUILD_BINARY_PATH = path.join(
-      root,
-      "node_modules",
-      "esbuild",
-      "esbuild.exe"
-    );
-  } else {
-    process.env.ESBUILD_BINARY_PATH = path.join(
-      root,
-      "node_modules",
-      "esbuild",
-      "bin",
-      "esbuild"
-    );
-  }
-
   let toc: Toc[] = [];
 
   const { code, frontmatter } = await bundleMDX({
