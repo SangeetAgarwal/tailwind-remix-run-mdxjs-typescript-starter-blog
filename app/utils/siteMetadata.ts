@@ -14,6 +14,7 @@ const siteMetadata = {
   linkedin: "https://www.linkedin.com",
   stackoverflow: "https://www.stackoverflow.com",
   locale: "en-US",
+  twitterUsername: "@twitterhandle",
 };
 
 export { siteMetadata };

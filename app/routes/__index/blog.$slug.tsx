@@ -7,6 +7,8 @@ import { useLoaderData } from "@remix-run/react";
 import { getSeoMeta } from "~/seo";
 import formatDate from "~/lib/utils/formatDate";
 import type { SEOHandle } from "@balavishnuvj/remix-seo";
+import { siteMetadata } from "~/utils/siteMetadata";
+import type { ReadTimeResults } from "reading-time";
 
 const DEFAULT_LAYOUT = "PostSimpleLayout";
 
@@ -20,11 +22,51 @@ export const handle: SEOHandle = {
 };
 
 export let meta = (context: {
-  data: { frontMatter: { title: any; description: any } };
+  data: {
+    frontMatter: {
+      date: string | null;
+      title: any;
+      description: any;
+      images: string[];
+      readingTime: ReadTimeResults;
+      slug: string | null;
+      fileName: string;
+    };
+  };
 }) => {
   let seoMeta = getSeoMeta({
     title: context.data.frontMatter.title,
     description: context.data.frontMatter.description,
+    twitter: {
+      card: "summary_large_image",
+      site: `${siteMetadata.siteUrl}`,
+      creator: `${siteMetadata.twitterUsername}`,
+      title: context.data.frontMatter.title,
+      description: context.data.frontMatter.description,
+      image: {
+        url: context.data.frontMatter.images
+          ? `${siteMetadata.siteUrl}${context.data.frontMatter.images[0]}`
+          : "",
+        alt: context.data.frontMatter.title,
+      },
+    },
+    openGraph: {
+      description: context.data.frontMatter.description,
+      title: context.data.frontMatter.title,
+      url: `${siteMetadata.siteUrl}/blog/${context.data.frontMatter.slug}`,
+      type: "article",
+      article: {
+        authors: [`${siteMetadata.author}`],
+      },
+      images: context.data.frontMatter.images
+        ? context.data.frontMatter.images.map((image) => {
+            return {
+              url: `${siteMetadata.siteUrl}${image}`,
+              alt: context.data.frontMatter.title,
+            };
+          })
+        : [],
+    },
   });
   return {
     ...seoMeta,
