@@ -101,5 +101,8 @@
   },
   "prisma": {
     "seed": "ts-node --require tsconfig-paths/register prisma/seed.ts"
+  },
+  "overrides": {
+    "pac-resolver": "^7.0.0"
   }
 }
