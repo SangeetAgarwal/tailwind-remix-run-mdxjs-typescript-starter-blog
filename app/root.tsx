@@ -7,6 +7,7 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  useMatches,
 } from "@remix-run/react";
 
 import baseStyles from "~/tailwind.css";
@@ -50,12 +51,16 @@ export const links: LinksFunction = () => [
 ];
 
 export default function App() {
+  const matches = useMatches();
+  const match = matches.find((match) => match.data && match.data.canonical);
+  const canonical = match?.data.canonical;
   return (
     <html lang="en" className="h-full">
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
         <Meta />
+        {!!canonical && <link rel="canonical" href={canonical} />}
         <Links />
       </head>
       <body className="h-full">

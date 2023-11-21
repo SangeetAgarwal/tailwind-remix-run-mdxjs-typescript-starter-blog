@@ -1,4 +1,5 @@
 import type readingTime from "reading-time";
+import type { ReadTimeResults } from "reading-time";
 export type PrevNext = {
   title: string;
   slug: string;
@@ -54,4 +55,28 @@ export interface MdxLayoutRendererProps {
   toc?: Toc[];
   [key: string]: any;
   authorFrontMatter?: MdxFrontMatter;
+}
+export interface PostProps {
+  mdxSource: string;
+  toc: Toc[];
+  frontMatter: {
+    date: string | null;
+    title: any;
+    description: any;
+    images: any;
+    readingTime: ReadTimeResults;
+    slug: string | null;
+    fileName: string;
+  };
+  authorFrontMatter: {
+    name: string | null;
+    avatar: string | null;
+    occupation: string | null;
+    company: string | null;
+    email: string | null;
+    twitter: string | null;
+    linkedin: string | null;
+    github: string | null;
+  };
+  [key: string]: any;
 }

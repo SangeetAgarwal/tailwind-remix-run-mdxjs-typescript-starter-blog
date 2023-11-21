@@ -45,7 +45,8 @@ export const loader: LoaderFunction = async ({
     filteredFrontMatters.forEach((frontMatter) => {
       return (frontMatter.date = formatDate(frontMatter.date));
     });
-    return json({ filteredFrontMatters, tag });
+    const canonical = `${siteMetadata.siteUrl}/tags/${tag}`;
+    return json({ filteredFrontMatters, tag, canonical });
   }
 };
 

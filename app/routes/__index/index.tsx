@@ -22,7 +22,8 @@ export const loader: LoaderFunction = async () => {
   posts.forEach((post) => {
     return (post.date = formatDate(post.date));
   });
-  return { posts, siteMetadata };
+  const canonical = `${siteMetadata.siteUrl}`;
+  return { posts, siteMetadata, canonical };
 };
 const MAX_DISPLAY = 10;
 export default function Index() {
