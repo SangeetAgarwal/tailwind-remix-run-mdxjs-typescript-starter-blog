@@ -1,0 +1,25 @@
+diff --git a/node_modules/@balavishnuvj/remix-seo/build/sitemap/utils.js b/node_modules/@balavishnuvj/remix-seo/build/sitemap/utils.js
+index deba84e..300068e 100644
+--- a/node_modules/@balavishnuvj/remix-seo/build/sitemap/utils.js
++++ b/node_modules/@balavishnuvj/remix-seo/build/sitemap/utils.js
+@@ -54,7 +54,10 @@ async function getSitemapXml(request, remixContext, options) {
+             const parentPath = parent.path
+                 ? removeTrailingSlash(parent.path)
+                 : "";
+-            path = `${parentPath}/${path}`;
++            // path = `${parentPath}/${path}`;
++            if (!path.startsWith('/')) {
++                path = `${parentPath}/${path}`;
++            }
+             parentId = parent.parentId;
+             parent = parentId ? remixContext.manifest.routes[parentId] : null;
+         }
+@@ -62,6 +65,8 @@ async function getSitemapXml(request, remixContext, options) {
+         // getSitemapEntries function, we just
+         if (path.includes(":"))
+             return;
++        if (path.includes("*"))
++            return;
+         if (id === "root")
+             return;
+         const entry = { route: removeTrailingSlash(path) };
