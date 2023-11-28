@@ -9,6 +9,8 @@ Easily the most feature rich Remix-run markdown blogging template in existence. 
 
 ## Examples
 
+![img.png](img.png)
+
 - [Demo Blog](https://tailwind-remix-run-mdxjs-typescript-starter-blog.fly.dev/) - this repository is deployed to [fly.io](https://fly.io/)
 - [My personal blog](https://www.makebitbyte.com/)
 
@@ -29,6 +31,12 @@ Easily the most feature rich Remix-run markdown blogging template in existence. 
 - **Easily retrieve data with [mdx-bundler](https://github.com/kentcdodds/mdx-bundler)**
 - **A page to showcase all your projects**
 - **Support for tags - each unique tag will be its own page**
+- **Mobile-friendly view**
+- **~~Support for analytics including Umami, Plausible, Simple Analytics, Posthog and Google Analytics~~** still to be implemented
+- **~~Support for comments via Newsletter API and component with support for Mailchimp, Buttondown, Convertkit, Klaviyo, Revue, and Emailoctopus~~** still to be implemented
+- **~~Newsletter API and component with support for Mailchimp, Buttondown, Convertkit, Klaviyo, Revue, and Emailoctopus~~** still to be implemented
+
+Feature request or facing an issue? Check the [discussion page](https://github.com/SangeetAgarwal/tailwind-remix-run-mdxjs-typescript-starter-blog/discussions) to see if it has been brought up previously. Otherwise, feel free to start a new discussion thread. All ideas are welcome!
 
 ## Sample posts
 
