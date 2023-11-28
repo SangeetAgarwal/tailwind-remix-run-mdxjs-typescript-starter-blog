@@ -10,6 +10,7 @@ FROM base as deps
 WORKDIR /myapp
 
 ADD package.json package-lock.json .npmrc ./
+COPY ./patches ./patches
 RUN npm install --include=dev
 
 # Setup production node_modules
