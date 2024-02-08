@@ -11,6 +11,24 @@ import type { BlogFrontMatter } from "~/types/mdx";
 export let meta = (context: any) => {
   let seoMeta = getSeoMeta({
     title: "Home",
+    description: `${siteMetadata.description}`,
+    twitter: {
+      card: "summary_large_image",
+      site: `${siteMetadata.siteUrl}`,
+      creator: `${siteMetadata.twitterUsername}`,
+      title: "Home",
+      description: siteMetadata.description,
+      image: {
+        url: `${siteMetadata.siteUrl}/static/images/twitter-card.png`,
+        alt: "Home",
+      },
+    },
+    openGraph: {
+      description: siteMetadata.description,
+      title: "Home",
+      url: `${siteMetadata.siteUrl}`,
+      type: "website",
+    },
   });
   return {
     ...seoMeta,
